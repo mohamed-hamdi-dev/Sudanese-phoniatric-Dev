@@ -1,0 +1,507 @@
+/* ================= Auth Login/Register Split-Layout Styles ================= */
+/* Merged from logins/css: variables, layout, info-panel, form-panel, components, register */
+
+/* --- Variables & Reset (scoped to .split-layout) --- */
+.split-layout,
+.split-layout * {
+    box-sizing: border-box;
+}
+
+.split-layout {
+    --ynmo-green: #15b389;
+    --ynmo-dark-green: #116a5b;
+    --bg-light: #f0fbf8;
+    --text-dark: #333333;
+    --text-muted: #888888;
+    --border-color: #e5e7eb;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    color: var(--text-dark);
+}
+
+/* --- Layout --- */
+.split-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.form-side {
+    width: 50%;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.info-side {
+    width: 50%;
+    background-color: var(--bg-light);
+    position: relative;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- Info Panel --- */
+.bg-shape {
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 120%;
+    height: 60%;
+    border-radius: 50%;
+    border: 50px solid rgba(21, 179, 137, 0.05);
+    z-index: 0;
+}
+
+.info-content {
+    position: relative;
+    z-index: 1;
+    text-align: right;
+}
+
+.brand-name {
+    color: var(--ynmo-green);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
+.main-heading {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--ynmo-dark-green);
+    margin-bottom: 20px;
+}
+
+.sub-heading {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 600;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.laptop-mockup {
+    text-align: center;
+    margin-top: auto;
+}
+
+.laptop-mockup img {
+    width: 110%;
+    margin-right: -5%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Form Panel --- */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo-img {
+    width: 45px;
+}
+
+.split-layout .lang-switcher {
+    color: var(--ynmo-green);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.form-content-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.login-prompt {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 50px;
+    color: var(--text-muted);
+}
+
+.login-prompt a {
+    color: var(--ynmo-green);
+    text-decoration: none;
+}
+
+.step-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--text-dark);
+}
+
+.split-layout .asterisk {
+    color: #e11d48;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 40px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.form-footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+
+.form-footer a:hover {
+    color: var(--ynmo-green);
+}
+
+.separator {
+    color: #cbd5e1;
+}
+
+/* --- Cards Grid (Account Type Selection) --- */
+ .split-layout .cards-grid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+ .split-layout .account-card {
+    flex: 1;
+    border: 1.5px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px 15px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.2s ease;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ .split-layout .account-card:hover {
+    border-color: var(--ynmo-green);
+    box-shadow: 0 4px 15px rgba(21, 179, 137, 0.1);
+}
+
+ .split-layout .account-card.selected {
+    border: 2px solid var(--ynmo-green);
+    background-color: rgba(21, 179, 137, 0.03);
+}
+
+ .split-layout .card-icon {
+    font-size: 32px;
+    color: #64748b;
+    margin-bottom: 15px;
+}
+
+ .split-layout .account-card.selected .card-icon {
+    color: var(--ynmo-green);
+}
+
+ .split-layout .card-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: #475569;
+}
+
+ .split-layout .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ .split-layout .step-dots {
+    display: flex;
+    gap: 8px;
+}
+
+ .split-layout .dot {
+    width: 20px;
+    height: 6px;
+    border-radius: 5px;
+    background-color: var(--border-color);
+}
+
+ .split-layout .dot.active {
+    background-color: var(--ynmo-green);
+}
+
+ .split-layout .primary-btn {
+    padding: 12px 50px;
+    background-color: var(--ynmo-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: 'Cairo', sans-serif;
+}
+
+ .split-layout .primary-btn:hover:not(:disabled) {
+    background-color: #129c76;
+}
+
+ .split-layout .primary-btn:disabled {
+    background-color: #a3e0cd;
+    cursor: not-allowed;
+}
+
+ .split-layout .float-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: var(--ynmo-green);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    text-decoration: none;
+}
+
+/* --- Register Form --- */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.input-box {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 15px;
+    position: relative;
+    transition: border-color 0.3s ease;
+}
+
+.input-box:focus-within {
+    border-color: var(--ynmo-green);
+}
+
+.input-box label {
+    display: block;
+    font-size: 11px;
+    color: var(--ynmo-green);
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.input-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    color: var(--text-dark);
+    background: transparent;
+}
+
+/* Phone Box */
+.phone-box {
+    display: flex;
+    padding: 0;
+    align-items: center;
+}
+
+.phone-box input {
+    padding: 15px;
+    flex: 1;
+}
+
+.country-code {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    border-right: 1px solid var(--border-color);
+}
+
+.country-code img {
+    width: 24px;
+    border-radius: 2px;
+}
+
+/* Password Box */
+.password-box {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ynmo-green);
+    opacity: 0.5;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Password Rules */
+.split-layout .password-rules {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.split-layout .password-rules li {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.split-layout .password-rules li i {
+    font-size: 15px;
+}
+
+/* Form Buttons */
+.form-buttons-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.btn-create {
+    flex: 2;
+    background-color: var(--ynmo-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-create:hover {
+    background-color: #129c76;
+    box-shadow: 0 4px 15px rgba(21, 179, 137, 0.2);
+}
+
+.btn-return {
+    flex: 1;
+    background-color: #f8fafc;
+    color: #64748b;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-return:hover {
+    background-color: #f1f5f9;
+    color: var(--text-dark);
+    border-color: #cbd5e1;
+}
+
+/* Phone Input Library */
+.phone-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.iti {
+    width: 100%;
+}
+
+.iti__flag-container {
+    direction: ltr;
+}
+
+.iti__selected-flag {
+    border-radius: 8px 0 0 8px;
+}
+
+.international-phone {
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 15px !important;
+    color: var(--text-dark) !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.iti--allow-dropdown input,
+.iti--allow-dropdown input[type=text],
+.iti--allow-dropdown input[type=tel],
+.iti--allow-dropdown input[type=password] {
+    padding-right: 6px;
+    padding-left: 52px;
+    margin-left: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .split-layout {
+        flex-direction: column;
+    }
+    .form-side,
+    .info-side {
+        width: 100%;
+    }
+    .info-side {
+        display: none;
+    }
+    .form-side {
+        padding: 20px 25px;
+        min-height: 100vh;
+    }
+    .cards-grid {
+        flex-direction: column;
+    }
+    .form-row {
+        flex-direction: column;
+    }
+}

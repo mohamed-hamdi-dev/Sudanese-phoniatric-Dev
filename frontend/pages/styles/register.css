@@ -1,0 +1,506 @@
+/* ================= تصميم نموذج إنشاء الحساب الجديد ================= */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .register-form {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-form {
+        gap: 8px;
+    }
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        gap: 8px;
+    }
+}
+
+.input-box {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 15px;
+    position: relative;
+    transition: border-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .input-box {
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-box {
+        padding: 6px 10px;
+        border-radius: 6px;
+        min-height: 38px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.input-box:focus-within {
+    border-color: var(--ynmo-green);
+}
+
+.input-box label {
+    display: block;
+    font-size: 11px;
+    color: var(--ynmo-green);
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+@media (max-width: 768px) {
+    .input-box label {
+        font-size: 10px;
+        margin-bottom: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-box label {
+        font-size: 9px;
+        margin-bottom: 1px;
+    }
+}
+
+.input-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    color: var(--text-dark);
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    .input-box input {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-box input {
+        font-size: 12px;
+        min-height: 32px;
+        padding: 4px 0;
+    }
+}
+
+/* Remove browser autofill tint inside auth inputs */
+.input-box input:-webkit-autofill,
+.input-box input:-webkit-autofill:hover,
+.input-box input:-webkit-autofill:focus,
+.input-box input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset !important;
+    -webkit-text-fill-color: var(--text-dark) !important;
+    box-shadow: 0 0 0 1000px #fff inset !important;
+    transition: background-color 9999s ease-out 0s;
+}
+
+/* تصميم حقل رقم الهاتف وكود الدولة */
+.phone-box {
+    display: flex;
+    padding: 0;
+    align-items: center;
+}
+
+@media (max-width: 480px) {
+    .phone-box {
+        border-radius: 6px;
+    }
+}
+
+.phone-box input {
+    padding: 15px;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .phone-box input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .phone-box input {
+        padding: 8px 10px;
+        font-size: 12px;
+        min-height: 36px;
+    }
+}
+
+.country-code {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    border-right: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .country-code {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .country-code {
+        padding: 8px 10px;
+        gap: 4px;
+    }
+}
+
+.country-code img {
+    width: 24px;
+    border-radius: 2px;
+}
+
+@media (max-width: 480px) {
+    .country-code img {
+        width: 20px;
+    }
+}
+
+/* تصميم حقل كلمة المرور وأيقونة العين */
+.password-box {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ynmo-green);
+    opacity: 0.5;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
+    .eye-icon {
+        left: 10px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .eye-icon {
+        left: 8px;
+        font-size: 14px;
+    }
+}
+
+/* شروط كلمة المرور السفلية */
+.password-rules {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+@media (max-width: 480px) {
+    .password-rules {
+        margin-top: 3px;
+    }
+}
+
+.password-rules li {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 480px) {
+    .password-rules li {
+        font-size: 11px;
+        margin-bottom: 4px;
+        gap: 6px;
+    }
+}
+
+.password-rules li i {
+    font-size: 15px;
+}
+
+@media (max-width: 480px) {
+    .password-rules li i {
+        font-size: 13px;
+    }
+}
+/* ================= تصميم أزرار الفورم (إنشاء حساب والرجوع) ================= */
+.form-buttons-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .form-buttons-container {
+        gap: 12px;
+        margin-top: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-buttons-container {
+        gap: 8px;
+        margin-top: 16px;
+        flex-direction: column;
+    }
+}
+
+/* زر إنشاء الحساب الأساسي */
+.btn-create {
+    flex: 2;
+    /* بياخد ضعف مساحة زرار الرجوع */
+    background-color: var(--ynmo-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .btn-create {
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-create {
+        flex: unset;
+        padding: 8px 12px;
+        font-size: 12px;
+        min-height: 40px;
+        border-radius: 6px;
+    }
+}
+
+.btn-create:hover {
+    background-color: #129c76;
+    box-shadow: 0 4px 15px rgba(21, 179, 137, 0.2);
+    /* ظل خفيف أخضر عند الوقوف عليه */
+}
+
+/* زر الرجوع الثانوي */
+.btn-return {
+    flex: 1;
+    /* مساحة أصغر */
+    background-color: #f8fafc;
+    color: #64748b;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* المسافة بين الكلمة والسهم */
+}
+
+@media (max-width: 768px) {
+    .btn-return {
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-return {
+        flex: unset;
+        padding: 8px 12px;
+        font-size: 12px;
+        min-height: 40px;
+        border-radius: 6px;
+    }
+}
+
+.btn-return:hover {
+    background-color: #f1f5f9;
+    color: var(--text-dark);
+    border-color: #cbd5e1;
+}
+
+.login-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+
+@media (max-width: 480px) {
+    .login-actions {
+        margin-top: 4px;
+        margin-bottom: 8px;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+}
+
+.remember-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .remember-check {
+        font-size: 12px;
+        gap: 4px;
+    }
+}
+
+.remember-check input {
+    accent-color: var(--ynmo-green);
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 480px) {
+    .remember-check input {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.forgot-link {
+    color: var(--ynmo-green);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+@media (max-width: 480px) {
+    .forgot-link {
+        font-size: 12px;
+    }
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+/* ================= تصميم مكتبة أرقام الهواتف ================= */
+.phone-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.iti {
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .iti {
+        border-radius: 6px;
+    }
+}
+
+/* تظبيط اتجاه القائمة عشان العربي */
+.iti__flag-container {
+    direction: ltr;
+}
+
+.iti__selected-flag {
+    border-radius: 8px 0 0 8px;
+}
+
+@media (max-width: 480px) {
+    .iti__selected-flag {
+        border-radius: 6px 0 0 6px;
+    }
+}
+
+/* شكل حقل الإدخال نفسه */
+.international-phone {
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 15px !important;
+    color: var(--text-dark) !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+@media (max-width: 480px) {
+    .international-phone {
+        font-size: 12px !important;
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+    }
+}
+
+/* إخفاء الحدود الافتراضية للمكتبة عشان نستخدم حدود الـ input-box بتاعتنا */
+.iti--allow-dropdown input,
+.iti--allow-dropdown input[type=text],
+.iti--allow-dropdown input[type=tel],
+.iti--allow-dropdown input[type=password] {
+    padding-right: 6px;
+    padding-left: 52px;
+    margin-left: 0;
+}
+
+@media (max-width: 480px) {
+    .iti--allow-dropdown input,
+    .iti--allow-dropdown input[type=text],
+    .iti--allow-dropdown input[type=tel],
+    .iti--allow-dropdown input[type=password] {
+        padding-right: 4px;
+        padding-left: 44px;
+    }
+}

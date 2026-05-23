@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>هيكل التقييم</title>
+  <link rel="stylesheet" href="styles/app-tokens.css">
+  <link rel="stylesheet" href="styles/app-base.css">
+  <link rel="stylesheet" href="styles/app-layout.css">
+  <link rel="stylesheet" href="styles/app-components.css">
+  <link rel="stylesheet" href="styles/app-pages.css">
+  <link rel="stylesheet" href="styles/app-responsive.css">
+  <link rel="stylesheet" href="styles/evaluations-flow.css">
+</head>
+
+<body>
+  <div class="app-shell structure-shell">
+    <aside class="desktop-sidebar">
+      <div class="desktop-sidebar-rail">
+        <div class="sidebar-header">
+          <a href="./dashboard.html" class="sidebar-logo sidebar-logo--top">
+            <img class="brand-mark__image brand-mark__image--contain" src="assets/logos/sudanese-phoniatric-logo.jpg"
+              alt="logo">
+          </a>
+        </div>
+        <a href="./evaluations.html" class="sidebar-item is-active" aria-label="التقييم والاستمارات">🗎</a>
+        <div class="sidebar-spacer"></div>
+      </div>
+    </aside>
+
+    <header class="topbar topbar--structure">
+      <div class="page-brand">
+        <div class="page-brand-copy">
+          <p>التقييم والاستشارات <span class="structure-breadcrumb-sep">›</span> عرض التقييم أو الاستشارة</p>
+          <h2>sudanesephoniatric</h2>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-shell evaluations-shell structure-page-shell">
+      <main class="main-panel evaluations-main-panel structure-main-panel">
+        <section class="flow-page structure-page structure-page--exact">
+          <div class="library-simple-screen">
+            <div class="library-create-header">
+              <h2>إضافة منهج جديد</h2>
+              <p>الأعضاء أدناه هم الذين لديهم الصلاحية للإضافة، فضلًا الانتقال لصفحة الصلاحيات في الإعدادات لمعرفة المزيد</p>
+            </div>
+            
+            <div class="library-short-heading">
+              <div class="library-short-heading-main">
+                <h3><span data-eval-title></span> المحتوى</h3>
+                <span data-eval-diagnosis hidden></span>
+                <span data-eval-beneficiary hidden></span>
+                <div class="library-short-tabs"><button class="library-short-tab is-active" type="button">الجوانب</button></div>
+              </div>
+              <button type="button" class="library-short-add-btn" data-show-add-section>
+                <i data-lucide="plus-circle"></i>
+                إضافة جانب جديد
+              </button>
+            </div>
+            <div class="library-simple-divider"></div>
+
+            <div class="library-short-goals-list" style="margin-top: 22px;">
+              <div class="library-short-goals-empty structure-empty-note-exact" style="margin: 0; min-height: 52px;">
+                <span>انشاء جانب جديد</span>
+                <i data-lucide="alert-circle" aria-hidden="true"></i>
+              </div>
+
+              <div class="library-tree-row library-tree-row--aspect library-tree-row--inline-form" style="margin-top: 20px; background: #fff;" data-add-section-form hidden>
+                <div class="inline-aspect-input-wrapper">
+                  <input type="text" class="inline-aspect-input" name="section_title" placeholder="إسم الجانب">
+                </div>
+                <div class="inline-aspect-actions">
+                  <button type="button" class="btn-inline-save" data-create-section>انشاء</button>
+                  <button type="button" class="btn-inline-save-more" data-create-more-section>انشاء وأضف جانب آخر</button>
+                  <button type="button" class="btn-inline-cancel" data-cancel-add-section>إلغاء</button>
+                </div>
+              </div>
+
+              <div class="structure-sections" data-sections-root style="margin-top: 20px;"></div>
+            </div>
+
+            <div class="library-create-actions library-create-actions--simple">
+              <button type="button" class="btn-save structure-done-btn">تم</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="app-footer-wrap">
+      <footer class="footer-bar"></footer>
+    </div>
+  </div>
+
+  <div class="flow-modal" id="assign-beneficiaries-modal" hidden>
+    <div class="flow-modal-dialog">
+      <h3 style="margin-bottom:8px">تعيين للمستفيدين</h3>
+      <div class="empty-warning"
+        style="display:flex; align-items:center; gap:8px; margin-bottom:24px; font-size:1.35rem">
+        <span><svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11v6h2v-6h-2zm0-4v2h2V7h-2z"
+              fill="currentColor" />
+          </svg></span>
+        <span><strong>ملاحظة:</strong> يمكنك تعيين مستفيد لتتمكن من إجراء التقييم أو الاستمارة عليه لاحقاً!</span>
+      </div>
+      <div data-beneficiary-select></div>
+      <div class="flow-actions" style="margin-top:16px">
+        <button class="outline-btn" data-close-modal="assign-beneficiaries-modal">إلغاء</button>
+        <button class="solid-btn green" data-submit-beneficiaries>تعيين</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-modal" id="add-item-modal" hidden>
+    <div class="flow-modal-dialog">
+      <h3>أضف بند جديد</h3>
+      <form data-add-item-form>
+        <label class="evaluations-field">
+          <span class="evaluations-label">عنوان البند</span>
+          <input class="evaluations-input" name="item_title">
+        </label>
+        <div class="flow-actions-inline">
+          <label><input type="radio" name="item_type" value="multiple" checked> اختيار متعدد</label>
+          <label><input type="radio" name="item_type" value="open"> مفتوح</label>
+        </div>
+        <div data-options-root>
+          <div class="option-row" data-option-row>
+            <input class="evaluations-input" name="option_label" placeholder="الاسم">
+            <input class="evaluations-input" name="option_score" type="number" value="0">
+          </div>
+        </div>
+        <button class="solid-btn green" type="button" data-open-goals>الأهداف المقترحة</button>
+        <button class="outline-btn" type="button" data-add-option>إضافة خيار</button>
+        <label class="evaluations-field">
+          <span class="evaluations-label">ملاحظات التعليمات</span>
+          <textarea class="evaluations-textarea" name="item_notes"></textarea>
+        </label>
+        <div class="flow-actions">
+          <button class="outline-btn" type="button" data-close-modal="add-item-modal">إلغاء</button>
+          <button class="solid-btn green" type="button" data-add-item-submit>إنشاء</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="flow-modal" id="goals-modal" hidden>
+    <div class="flow-modal-dialog">
+      <h3>الأهداف المقترحة</h3>
+      <input class="flow-search" placeholder="بحث">
+      <div class="items-list">
+        <label><input type="checkbox"> تحسين التواصل البصري</label>
+        <label><input type="checkbox"> زيادة الانتباه</label>
+        <label><input type="checkbox"> تنمية المهارات الاجتماعية</label>
+      </div>
+      <div class="flow-actions" style="margin-top:16px">
+        <button class="solid-btn green" data-close-modal="goals-modal">تم</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-modal" id="edit-evaluation-modal" hidden>
+    <div class="flow-modal-dialog">
+      <h3>تعديل معلومات التقييم أو الاستشارة</h3>
+      <label class="evaluations-field">
+        <span class="evaluations-label">اسم التقييم أو الاستشارة</span>
+        <input class="evaluations-input" name="edit_title">
+      </label>
+      <div class="evaluations-field">
+        <span class="evaluations-label">التشخيص</span>
+        <div data-edit-diagnosis-select></div>
+      </div>
+      <label class="evaluations-field">
+        <span class="evaluations-label">الوصف</span>
+        <textarea class="evaluations-textarea rich-editor-field" name="edit_description"></textarea>
+      </label>
+      <div class="flow-actions">
+        <button class="outline-btn" data-close-modal="edit-evaluation-modal">إلغاء</button>
+        <button class="solid-btn green" data-save-edit-eval>حفظ</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/multiselect.js"></script>
+  <script src="js/modals.js"></script>
+  <script src="js/rich-editor.js"></script>
+  <script src="js/evaluation-structure.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  </script>
+</body>
+
+</html>

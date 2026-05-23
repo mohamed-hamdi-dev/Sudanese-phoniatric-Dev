@@ -1,0 +1,28 @@
+{
+  "accountTypes": [
+    {
+      "id": "school",
+      "label": "مركز/ مدرسة",
+      "iconClass": "fa-regular fa-building",
+      "enabled": false,
+      "registerHref": "register-school.html",
+      "lockMessage": "متاح قريباً"
+    },
+    {
+      "id": "teacher",
+      "label": "معلم/ أخصائي",
+      "iconClass": "fa-solid fa-chalkboard-user",
+      "iconColor": "#15b389",
+      "enabled": true,
+      "registerHref": "register-teacher.html"
+    },
+    {
+      "id": "family",
+      "label": "أسرة",
+      "iconClass": "fa-solid fa-people-roof",
+      "iconColor": "#15b389",
+      "enabled": true,
+      "registerHref": "register-family-app.html"
+    }
+  ]
+}

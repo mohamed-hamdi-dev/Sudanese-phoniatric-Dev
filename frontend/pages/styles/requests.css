@@ -1,0 +1,27 @@
+.container-requests-footer {
+  margin-top: 24px !important;
+  height: auto;
+}
+
+/* Requests: first filter is a text search input */
+.requests-page .filter-box--search {
+  align-items: flex-start;
+}
+
+.requests-page .filter-search-input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.45rem;
+  line-height: 1.4;
+  text-align: right;
+  padding: 0;
+  margin-top: 2px;
+}
+
+.requests-page .filter-search-input::placeholder {
+  color: #97a3c0;
+}
+

@@ -1,0 +1,36 @@
+:root {
+  --bg: rgb(242, 244, 245);
+  --surface: #ffffff;
+  --surface-soft: #f8fbfd;
+  --surface-mint: #edf9f7;
+  --surface-ice: #f4fbfb;
+  --surface-muted: #f3f6f9;
+  --text: rgb(41, 38, 50);
+  --muted: #7884a3;
+  --muted-strong: #617094;
+  --line: #e8edf3;
+  --green: rgb(24, 176, 135);
+  --green-dark: rgb(0, 126, 85);
+  --green-glow: rgba(24, 176, 135, 0.18);
+  --purple: rgb(109, 72, 168);
+  --purple-dark: #6546bb;
+  --purple-glow: rgba(109, 72, 168, 0.16);
+  --yellow: #f9c52f;
+  --shadow: 0 20px 50px rgba(77, 88, 127, 0.08);
+  --card-shadow: 0 12px 30px rgba(90, 103, 145, 0.08);
+  --card-shadow-soft: 0 8px 24px rgba(112, 123, 167, 0.07);
+  --glow-soft: 0 0 0 1px rgba(255, 255, 255, 0.88), 0 20px 40px rgba(215, 225, 240, 0.22);
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --radius-xs: 10px;
+  --header-h: 106px;
+  --side-right: 72px;
+  --left-rail: 360px;
+  --content-max: 1720px;
+  --shell-gap: 28px;
+  --page-pad: 28px;
+  --section-gap: 24px;
+  --focus-ring: 0 0 0 3px rgba(24, 176, 135, 0.16);
+}

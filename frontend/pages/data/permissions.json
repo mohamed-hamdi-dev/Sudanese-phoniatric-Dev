@@ -1,0 +1,166 @@
+{
+  "nonprofitMode": true,
+  "rolePresets": {
+    "admin": {
+      "account_manage": true,
+      "subscription_manage": true,
+      "notifications_manage": true,
+      "kpi_view": true,
+      "users_table": false,
+      "library_create": true,
+      "library_delete": true,
+      "library_edit": true,
+      "beneficiaries_create": true,
+      "beneficiaries_delete": true,
+      "beneficiaries_edit": true,
+      "beneficiaries_tables": false,
+      "plan_eval_form": true,
+      "plan_delete_content": true,
+      "plan_mobile_view": true,
+      "eval_delete": true,
+      "storage_manage": false,
+      "app_login": true,
+      "portal_login": true,
+      "credentials_edit": false,
+      "social_assessment": false,
+      "social_attendance": false,
+      "report": false
+    },
+    "doctor": {
+      "account_manage": false,
+      "subscription_manage": false,
+      "notifications_manage": false,
+      "kpi_view": true,
+      "users_table": false,
+      "library_create": true,
+      "library_delete": false,
+      "library_edit": true,
+      "beneficiaries_create": false,
+      "beneficiaries_delete": false,
+      "beneficiaries_edit": true,
+      "beneficiaries_tables": false,
+      "plan_eval_form": true,
+      "plan_delete_content": false,
+      "plan_mobile_view": true,
+      "eval_delete": false,
+      "storage_manage": false,
+      "app_login": true,
+      "portal_login": true,
+      "credentials_edit": false,
+      "social_assessment": false,
+      "social_attendance": true,
+      "report": false
+    },
+    "member": {
+      "account_manage": false,
+      "subscription_manage": false,
+      "notifications_manage": false,
+      "kpi_view": false,
+      "users_table": false,
+      "library_create": false,
+      "library_delete": false,
+      "library_edit": false,
+      "beneficiaries_create": false,
+      "beneficiaries_delete": false,
+      "beneficiaries_edit": true,
+      "beneficiaries_tables": false,
+      "plan_eval_form": false,
+      "plan_delete_content": false,
+      "plan_mobile_view": false,
+      "eval_delete": false,
+      "storage_manage": false,
+      "app_login": true,
+      "portal_login": false,
+      "credentials_edit": false,
+      "social_assessment": false,
+      "social_attendance": false,
+      "report": false
+    }
+  },
+  "ownerOverrides": {
+    "users_table": true,
+    "storage_manage": true,
+    "report": true
+  },
+  "permissionSections": [
+    {
+      "title": "إدارة الحساب",
+      "items": [
+        { "key": "account_manage", "label": "إدارة الحساب" },
+        { "key": "subscription_manage", "label": "إدارة الاشتراك" },
+        { "key": "notifications_manage", "label": "إدارة الإشعارات" }
+      ]
+    },
+    {
+      "title": "إدارة الأعضاء",
+      "items": [
+        { "key": "kpi_view", "label": "استعراض مؤشرات قياس الأداء" },
+        { "key": "users_table", "label": "جدول المستخدمين" }
+      ]
+    },
+    {
+      "title": "إدارة المكتبة",
+      "items": [
+        { "key": "library_create", "label": "إنشاء" },
+        { "key": "library_delete", "label": "حذف" },
+        { "key": "library_edit", "label": "تعديل" },
+        { "key": "library_stop_edit", "label": "وقف التعديل في المكتبة", "adminOnly": true }
+      ]
+    },
+    {
+      "title": "إدارة المستفيدين",
+      "items": [
+        { "key": "beneficiaries_create", "label": "إنشاء" },
+        { "key": "beneficiaries_delete", "label": "حذف" },
+        { "key": "beneficiaries_edit", "label": "تعديل" },
+        { "key": "beneficiaries_tables", "label": "الجداول" }
+      ]
+    },
+    {
+      "title": "إدارة الخطة الفردية",
+      "items": [
+        { "key": "plan_eval_form", "label": "تعيين/إبداء تقييم أو استمارة" },
+        { "key": "plan_delete_content", "label": "حذف المحتوى" },
+        { "key": "plan_mobile_view", "label": "عرض الخطة العامة على الجوال" }
+      ]
+    },
+    {
+      "title": "إدارة التقييم أو الاستمارة",
+      "items": [
+        { "key": "eval_delete", "label": "حذف" }
+      ]
+    },
+    {
+      "title": "إدارة مساحة تخزين المركز",
+      "items": [
+        { "key": "storage_manage", "label": "إدارة الحذف واستعادة الملفات" }
+      ]
+    },
+    {
+      "title": "تسجيل الدخول",
+      "items": [
+        { "key": "app_login", "label": "الدخول للتطبيق" },
+        { "key": "portal_login", "label": "الدخول للبوابة" }
+      ]
+    },
+    {
+      "title": "بيانات تسجيل دخول المستخدمين",
+      "items": [
+        { "key": "credentials_edit", "label": "تعديل بيانات تسجيل الدخول" }
+      ]
+    },
+    {
+      "title": "إمكانيات الأخصائي الاجتماعي",
+      "items": [
+        { "key": "social_assessment", "label": "التقييمات أو الاستمارات الاجتماعية" },
+        { "key": "social_attendance", "label": "الحضور / الغياب" }
+      ]
+    },
+    {
+      "title": "لوحة التحكم",
+      "items": [
+        { "key": "report", "label": "إصدار تقرير" }
+      ]
+    }
+  ]
+}

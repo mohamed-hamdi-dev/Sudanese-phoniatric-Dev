@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الإعدادات - Sudanese Phoniatric</title>
+  <link rel="stylesheet" href="styles/app-tokens.css">
+  <link rel="stylesheet" href="styles/app-base.css">
+  <link rel="stylesheet" href="styles/app-layout.css">
+  <link rel="stylesheet" href="styles/app-components.css">
+  <link rel="stylesheet" href="styles/app-pages.css">
+    <link rel="stylesheet" href="styles/app-settings.css">
+  <link rel="stylesheet" href="styles/app-responsive.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="desktop-sidebar">
+      <div class="desktop-sidebar-rail">
+        <div class="sidebar-header">
+          <a href="./dashboard.html" class="sidebar-logo sidebar-logo--top">
+            <img class="brand-mark__image brand-mark__image--contain" src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Sudanese Phoniatric logo">
+          </a>
+        </div>
+        <a href="./dashboard.html" class="sidebar-item" aria-label="لوحة التحكم">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="./library.html" class="sidebar-item" aria-label="المكتبة">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v16H7.5A2.5 2.5 0 0 0 5 21V5.5Zm0 0V19m4-12h6m-6 4h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./evaluations.html" class="sidebar-item" aria-label="التقييم والاستمارة">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8 4h8l4 4v12H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 0v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 12h6M10 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./beneficiaries.html" class="sidebar-item" aria-label="المستفيدين">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1M5.5 12.5A2.5 2.5 0 1 0 5.5 7.5M18.5 12.5A2.5 2.5 0 1 0 18.5 7.5M3 20v-.6A3.4 3.4 0 0 1 6.4 16M21 20v-.6a3.4 3.4 0 0 0-3.4-3.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./members.html" class="sidebar-item" aria-label="الأعضاء">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M13 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 8v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1M5 8H3m2 5H2m3 5H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./families.html" class="sidebar-item" aria-label="الأسر">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5.5 13.5A2.5 2.5 0 1 0 5.5 8.5m13 5a2.5 2.5 0 1 0 0-5M8 19v-.5A3.5 3.5 0 0 1 11.5 15h1A3.5 3.5 0 0 1 16 18.5v.5M3 19v-.4A2.6 2.6 0 0 1 5.6 16M21 19v-.4a2.6 2.6 0 0 0-2.6-2.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./requests.html" class="sidebar-item" aria-label="الطلبات">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8.5 4h7a1.5 1.5 0 0 1 1.5 1.5v14h-10V5.5A1.5 1.5 0 0 1 8.5 4Zm1 0v2h5V4M10 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./attendance.html" class="sidebar-item" aria-label="الحضور و الغياب">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Zm3 7 2 2 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="./settings.html" class="sidebar-item is-active" aria-label="الإعدادات">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.32 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="sidebar-spacer"></div>
+        <button type="button" class="sidebar-item sidebar-item--flag" aria-label="تغيير اللهجة" onclick="document.getElementById('language-modal').classList.add('is-open')">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="13" fill="#1E9E58"/><path d="M8 10.5h10M8.6 13h8.8M9.4 15.3h7.2m-6.8 2.1h6l-1.1.9h-4.6l-.3-.9Z" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <header class="topbar" style="justify-content: flex-end;">
+      <div class="topbar-left">
+        <button class="topbar-bell" aria-label="الإشعارات">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 17h12m-9 0a3 3 0 0 0 6 0m-7-8a4 4 0 1 1 8 0c0 4 1.5 5 1.5 5h-11S8 13 8 9Z" stroke="#2F2D3D" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="topbar-account" data-account-menu>
+          
+          <div class="account-card">
+            <div class="account-avatar">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="account-meta">
+              <div class="account-name">sudanesephoniatric</div>
+              <div class="account-title">المالك</div>
+            </div>
+            <div class="account-avatar">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1M5.5 12.5A2.5 2.5 0 1 0 5.5 7.5M18.5 12.5A2.5 2.5 0 1 0 18.5 7.5M3 20v-.6A3.4 3.4 0 0 1 6.4 16M21 20v-.6a3.4 3.4 0 0 0-3.4-3.4" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+          <button class="mini-switcher" type="button" aria-label="قائمة الحساب" aria-expanded="false" data-account-toggle>
+            <div class="account-avatar">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1M5.5 12.5A2.5 2.5 0 1 0 5.5 7.5M18.5 12.5A2.5 2.5 0 1 0 18.5 7.5M3 20v-.6A3.4 3.4 0 0 1 6.4 16M21 20v-.6a3.4 3.4 0 0 0-3.4-3.4" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="m5 8 5 5 5-5" stroke="#2F2D3D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="account-dropdown">
+            <a href="./settings.html" class="account-dropdown-item">ملف التعريف</a>
+            <a href="./settings.html" class="account-dropdown-item">تغيير كلمة المرور</a>
+            <a href="./dashboard.html" class="account-dropdown-item">تسجيل الخروج</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-topline">
+      <div class="mobile-topline-start">
+        <div class="ghost-avatar ghost-avatar--plain">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="mobile-bell">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 17h12m-9 0a3 3 0 0 0 6 0m-7-8a4 4 0 1 1 8 0c0 4 1.5 5 1.5 5h-11S8 13 8 9Z" stroke="#2F2D3D" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <div class="mobile-topline-end">
+        <button data-menu-open class="mobile-menu-btn" aria-label="فتح القائمة">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 8h14M5 12h14M5 16h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="brand-mark brand-mark--mobile">
+          <img class="brand-mark__image brand-mark__image--contain" src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Sudanese Phoniatric logo">
+        </div>
+      </div>
+    </div>
+    <div class="mobile-account">
+      <div class="mobile-account-card">
+        <div class="mobile-avatar">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="account-meta">
+          <div class="account-name mobile-account-name">sudanesephoniatric</div>
+          <div class="account-title mobile-account-title">المالك</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-overlay" data-mobile-overlay>
+      <div class="mobile-overlay-header">
+        <div class="mobile-overlay-brand">
+          <img class="brand-mark__image brand-mark__image--contain" src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Sudanese Phoniatric logo">
+        </div>
+        <button data-menu-close class="mobile-close-btn" aria-label="إغلاق القائمة">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="mobile-overlay-nav">
+        <div class="mobile-nav-card">
+          <div class="mobile-avatar">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div class="account-meta">
+            <div class="account-name mobile-account-name">sudanesephoniatric</div>
+            <div class="account-title mobile-account-title">المالك</div>
+          </div>
+        </div>
+        <div class="mobile-nav-list">
+          <a href="./dashboard.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <span>لوحة التحكم</span>
+          </a>
+          <a href="./library.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v16H7.5A2.5 2.5 0 0 0 5 21V5.5Zm0 0V19m4-12h6m-6 4h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>المكتبة</span>
+          </a>
+          <a href="./evaluations.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8 4h8l4 4v12H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 0v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 12h6M10 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>التقييم والاستمارة</span>
+          </a>
+          <a href="./beneficiaries.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1M5.5 12.5A2.5 2.5 0 1 0 5.5 7.5M18.5 12.5A2.5 2.5 0 1 0 18.5 7.5M3 20v-.6A3.4 3.4 0 0 1 6.4 16M21 20v-.6a3.4 3.4 0 0 0-3.4-3.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>المستفيدين</span>
+          </a>
+          <a href="./members.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M13 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 8v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1M5 8H3m2 5H2m3 5H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>الأعضاء</span>
+          </a>
+          <a href="./families.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5.5 13.5A2.5 2.5 0 1 0 5.5 8.5m13 5a2.5 2.5 0 1 0 0-5M8 19v-.5A3.5 3.5 0 0 1 11.5 15h1A3.5 3.5 0 0 1 16 18.5v.5M3 19v-.4A2.6 2.6 0 0 1 5.6 16M21 19v-.4a2.6 2.6 0 0 0-2.6-2.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>الأسر</span>
+          </a>
+          <a href="./requests.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8.5 4h7a1.5 1.5 0 0 1 1.5 1.5v14h-10V5.5A1.5 1.5 0 0 1 8.5 4Zm1 0v2h5V4M10 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>الطلبات</span>
+          </a>
+          <a href="./attendance.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Zm3 7 2 2 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>الحضور و الغياب</span>
+          </a>
+          <a href="./settings.html" class="mobile-nav-item is-active">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.32 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>الإعدادات</span>
+          </a>
+          <button type="button" class="mobile-nav-flag" aria-label="تغيير اللهجة" onclick="document.getElementById('language-modal').classList.add('is-open')">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="13" fill="#1E9E58"/><path d="M8 10.5h10M8.6 13h8.8M9.4 15.3h7.2m-6.8 2.1h6l-1.1.9h-4.6l-.3-.9Z" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-shell">
+      <main class="main-panel">
+        <section class="settings-page">
+          <aside class="settings-sidebar-fixed">
+            <div class="settings-sidebar-content">
+              <div class="settings-account-summary">
+                <div class="settings-account-avatar" aria-hidden="true">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="settings-account-meta">
+                  <p class="settings-account-id">#4776</p>
+                  <h2 class="settings-account-name">Sudanesephoniatric</h2>
+                  <div class="settings-account-badges">
+                    <span class="settings-account-badge is-primary">المميزة</span>
+                    <span class="settings-account-badge is-secondary">مركز/مدرسة</span>
+                  </div>
+                  <p class="settings-account-date">مضاف ٢ مايو ٢٠٢٦</p>
+                </div>
+              </div>
+
+              <div class="settings-sidebar-divider"></div>
+
+              <div class="settings-topic-pill">اضطراب طيف التوحد</div>
+
+              <div class="settings-sidebar-divider"></div>
+
+              <div class="settings-contact-row">
+                <div class="settings-contact-icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="settings-nav" role="tablist" aria-label="أقسام الإعدادات">
+                <button class="settings-nav-item is-active" type="button" data-settings-tab="profile" aria-selected="true">
+                  <span>ملف مقدم الخدمة</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <button class="settings-nav-item" type="button" data-settings-tab="inventory" aria-selected="false">
+                  <span>مخزن المركز</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <button class="settings-nav-item" type="button" data-settings-tab="invoices" aria-selected="false">
+                  <span>الفواتير</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          <div class="settings-main">
+            <section class="settings-section is-active" data-settings-panel="profile">
+              <header class="settings-section-header">
+                <h1 class="settings-section-title">ملف مقدم الخدمة</h1>
+              </header>
+
+              <div class="settings-surface-card settings-profile-card" data-settings-profile-card>
+                <div class="settings-profile-view" data-profile-view>
+                  <div class="settings-profile-orb">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                      <path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                    </svg>
+                    <button class="settings-profile-edit" type="button" aria-label="تعديل بيانات الحساب" data-profile-edit-toggle>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div class="settings-profile-grid">
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">اسم مقدم الخدمة</p>
+                      <p class="settings-profile-value" data-profile-display="providerName">sudanesephoniatric</p>
+                    </div>
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">نوع الإشتراك</p>
+                      <p class="settings-profile-value is-highlight">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M7 20V8l5-3 5 3v12M4 20h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                        <span data-profile-display="accountType">مركز/مدرسة</span>
+                      </p>
+                    </div>
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">الإشتراك</p>
+                      <p class="settings-profile-value" data-profile-display="subscription">المميزة</p>
+                    </div>
+
+                    <div class="settings-profile-row-line"></div>
+
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">هاتف/جوال</p>
+                      <p class="settings-profile-value is-muted" data-profile-display="phone">-</p>
+                    </div>
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">الموقع الإلكتروني</p>
+                      <p class="settings-profile-value is-muted" data-profile-display="website">-</p>
+                    </div>
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">البريد الإلكتروني</p>
+                      <p class="settings-profile-value is-muted" data-profile-display="email">-</p>
+                    </div>
+
+                    <div class="settings-profile-row-line"></div>
+
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">الدولة</p>
+                      <p class="settings-profile-value is-muted" data-profile-display="country">-</p>
+                    </div>
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">المنطقة</p>
+                      <p class="settings-profile-value is-muted" data-profile-display="region">-</p>
+                    </div>
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">المدينة</p>
+                      <p class="settings-profile-value is-muted" data-profile-display="city">-</p>
+                    </div>
+
+                    <div class="settings-profile-row-line"></div>
+
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">الرمز البريدي</p>
+                      <p class="settings-profile-value is-muted" data-profile-display="postalCode">-</p>
+                    </div>
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">العنوان</p>
+                      <p class="settings-profile-value is-muted" data-profile-display="address">-</p>
+                    </div>
+                    <div class="settings-profile-field">
+                      <p class="settings-profile-label">الحالة</p>
+                      <p class="settings-profile-value" data-profile-display="status">نشط</p>
+                    </div>
+                  </div>
+
+                  <div class="settings-profile-footer">
+                    <div class="settings-status-pill" data-profile-status-pill data-profile-edit-toggle role="button" tabindex="0" aria-label="Open profile editor">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <span data-profile-display="status">نشط</span>
+                    </div>
+                    <div class="settings-profile-updated" data-profile-updated>آخر تعديل السبت، ٢ مايو ٢٠٢٦ ٩:٤٢ م</div>
+                  </div>
+                </div>
+
+                <form class="settings-profile-editor" data-profile-editor hidden>
+                  <div class="settings-editor-layout">
+                    <aside class="settings-editor-sidebar">
+                      <div class="settings-editor-preview">
+                        <button class="settings-editor-trash" type="button" aria-label="حذف الصورة">
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M4 7h16M10 11v6m4-6v6M7 7l1 11a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2l1-11M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </button>
+                        <div class="settings-editor-dropzone" aria-hidden="true">
+                          <div class="settings-editor-dropzone-graphic">
+                            <svg width="74" height="74" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                              <path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+                            </svg>
+                            <div class="settings-editor-dropzone-text">اسحب الصورة هنا أو <span>استعرض ملفاتك</span></div>
+                          </div>
+                        </div>
+                        <div class="settings-editor-preview-label">معاينة</div>
+                        <div class="settings-editor-type-switcher" aria-hidden="true">
+                          <span class="settings-editor-type-chip">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                              <path d="M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                          </span>
+                          <span class="settings-editor-type-chip">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                              <path d="M12 4 5 8v8l7 4 7-4V8l-7-4Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+                          <span class="settings-editor-type-chip is-active">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                              <path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </aside>
+
+                    <div class="settings-editor-content">
+                      <div class="settings-editor-grid">
+                        <label class="settings-editor-field">
+                          <span>اسم مقدم الخدمة</span>
+                          <input type="text" name="providerName" value="sudanesephoniatric">
+                        </label>
+                        <label class="settings-editor-field is-readonly">
+                          <span>نوع الإشتراك</span>
+                          <input type="text" name="accountType" value="مركز/مدرسة" readonly>
+                        </label>
+                        <label class="settings-editor-field">
+                          <span>هاتف/جوال</span>
+                          <input type="text" name="phone" placeholder="-">
+                        </label>
+                        <label class="settings-editor-field">
+                          <span>الموقع الإلكتروني</span>
+                          <input type="url" name="website" placeholder="-">
+                        </label>
+                        <label class="settings-editor-field">
+                          <span>البريد الإلكتروني</span>
+                          <input type="email" name="email" placeholder="-">
+                        </label>
+                        <label class="settings-editor-field">
+                          <span>الرمز البريدي</span>
+                          <input type="text" name="postalCode" placeholder="-">
+                        </label>
+                        <label class="settings-editor-field">
+                          <span>الدولة</span>
+                          <select name="country">
+                            <option value="">-</option>
+                            <option value="السودان">السودان</option>
+                            <option value="مصر">مصر</option>
+                            <option value="السعودية">السعودية</option>
+                          </select>
+                        </label>
+                        <label class="settings-editor-field">
+                          <span>المنطقة</span>
+                          <input type="text" name="region" placeholder="-">
+                        </label>
+                        <label class="settings-editor-field">
+                          <span>المدينة</span>
+                          <input type="text" name="city" placeholder="-">
+                        </label>
+                        <label class="settings-editor-field settings-editor-field--wide">
+                          <span>العنوان</span>
+                          <textarea name="address" rows="3" placeholder="-"></textarea>
+                        </label>
+                        <label class="settings-editor-field">
+                          <span>الحالة</span>
+                          <select name="status">
+                            <option value="نشط" selected>نشط</option>
+                            <option value="غير نشط">غير نشط</option>
+                          </select>
+                        </label>
+                      </div>
+
+                      <div class="settings-editor-actions">
+                        <button class="settings-editor-cancel" type="button" data-profile-edit-cancel>إلغاء</button>
+                        <button class="settings-editor-save" type="submit">حفظ</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <section class="settings-section" data-settings-panel="inventory">
+              <header class="settings-section-header">
+                <h1 class="settings-section-title">إدارة المخزن</h1>
+              </header>
+            </section>
+
+            <section class="settings-section" data-settings-panel="invoices">
+              <header class="settings-section-header">
+                <h1 class="settings-section-title">الفواتير</h1>
+              </header>
+
+              <div class="invoice-empty-state">
+                <span class="invoice-empty-icon" aria-hidden="true">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 8h.01M11 12h1v4h1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/>
+                  </svg>
+                </span>
+                <strong>لا فواتير حتى الآن!</strong>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="app-footer-wrap">
+      <footer class="footer-bar">
+        <span>سياسة الخصوصية</span>
+        <span>ملفات الارتباط</span>
+        <span>الشروط والأحكام</span>
+        <span>جميع الحقوق محفوظة لينمو © 2026</span>
+      </footer>
+    </div>
+
+    <a class="floating-whatsapp" href="https://wa.me/966556106020" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Support">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 0 1-11.8 7l-4.2 1 1.1-4.1A8 8 0 1 1 20 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 8.8c.2-.4.4-.4.8-.4h.6c.2 0 .5.1.6.5l.5 1.6c.1.3 0 .5-.1.7l-.5.6c-.2.2-.1.4 0 .6a6 6 0 0 0 2.8 2.5c.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.5.5c.4.1.5.3.5.6v.7c0 .3-.1.5-.4.7-.5.3-1.2.5-1.9.4-1.4-.2-2.8-.9-4-2-1.1-1.1-2-2.5-2.2-4-.1-.6 0-1.3.3-1.8Z" fill="currentColor"/></svg>
+    </a>
+  </div>
+
+  <div class="modal-overlay" id="language-modal">
+    <div class="modal-dialog" style="width: min(90vw, 400px); min-height: 200px; padding: 30px;">
+      <button class="modal-close" onclick="document.getElementById('language-modal').classList.remove('is-open')">&times;</button>
+      <h2 class="modal-title" style="margin-bottom: 20px;">تغيير اللغة</h2>
+      <div class="modal-actions" style="justify-content: center; gap: 15px;">
+        <button class="btn-save" style="flex: 1;" onclick="document.getElementById('language-modal').classList.remove('is-open')">العربية</button>
+        <button class="btn-cancel" style="flex: 1;" onclick="document.getElementById('language-modal').classList.remove('is-open')">English</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script>
+    (function () {
+      const tabs = Array.from(document.querySelectorAll("[data-settings-tab]"));
+      const panels = Array.from(document.querySelectorAll("[data-settings-panel]"));
+
+      if (!tabs.length || !panels.length) {
+        return;
+      }
+
+      function setActiveTab(viewName, syncHash) {
+        const nextView = panels.some((panel) => panel.dataset.settingsPanel === viewName)
+          ? viewName
+          : "profile";
+
+        tabs.forEach((tab) => {
+          const isActive = tab.dataset.settingsTab === nextView;
+          tab.classList.toggle("is-active", isActive);
+          tab.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.toggle("is-active", panel.dataset.settingsPanel === nextView);
+        });
+
+        if (syncHash) {
+          const nextHash = "#" + nextView;
+          if (window.location.hash !== nextHash) {
+            history.replaceState(null, "", nextHash);
+          }
+        }
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", function () {
+          setActiveTab(tab.dataset.settingsTab, true);
+        });
+      });
+
+      const initialViewRaw = window.location.hash ? window.location.hash.slice(1) : "profile";
+      const initialView = initialViewRaw === "profile-edit" ? "profile" : initialViewRaw;
+      setActiveTab(initialView, false);
+    })();
+
+    (function () {
+      const card = document.querySelector("[data-settings-profile-card]");
+      const view = document.querySelector("[data-profile-view]");
+      const editor = document.querySelector("[data-profile-editor]");
+      const editButtons = Array.from(document.querySelectorAll("[data-profile-edit-toggle]"));
+      const cancelButton = document.querySelector("[data-profile-edit-cancel]");
+      const updatedLabel = document.querySelector("[data-profile-updated]");
+      const statusPill = document.querySelector("[data-profile-status-pill]");
+      const statusPillLabel = statusPill ? statusPill.querySelector("span") : null;
+      const statusPillIconPath = statusPill ? statusPill.querySelector("path") : null;
+
+      if (!card || !view || !editor) {
+        return;
+      }
+
+      if (statusPillLabel) {
+        statusPillLabel.removeAttribute("data-profile-display");
+        statusPillLabel.textContent = "\u062A\u0639\u062F\u064A\u0644";
+      }
+
+      if (statusPillIconPath) {
+        statusPillIconPath.setAttribute("d", "M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z");
+      }
+
+      const displayFields = [
+        "providerName",
+        "accountType",
+        "phone",
+        "website",
+        "email",
+        "country",
+        "region",
+        "city",
+        "postalCode",
+        "address",
+        "status"
+      ];
+
+      function formatValue(value) {
+        const nextValue = String(value || "").trim();
+        return nextValue ? nextValue : "-";
+      }
+
+      function setFieldValue(fieldName, value) {
+        const nextValue = formatValue(value);
+        document.querySelectorAll('[data-profile-display="' + fieldName + '"]').forEach((node) => {
+          node.textContent = nextValue;
+          if (node.classList.contains("settings-profile-value")) {
+            node.classList.toggle("is-muted", nextValue === "-");
+          }
+        });
+
+        if (fieldName === "providerName") {
+          document.querySelectorAll(".settings-account-name").forEach((node) => {
+            node.textContent = nextValue;
+          });
+        }
+
+        if (fieldName === "status" && statusPill) {
+          statusPill.classList.toggle("is-inactive", nextValue !== "نشط");
+        }
+      }
+
+      function fillFormFromDisplay() {
+        displayFields.forEach((fieldName) => {
+          const input = editor.elements.namedItem(fieldName);
+          const display = document.querySelector('[data-profile-display="' + fieldName + '"]');
+
+          if (!input || !display) {
+            return;
+          }
+
+          const value = display.textContent.trim();
+          input.value = value === "-" ? "" : value;
+        });
+      }
+
+      function setEditingState(isEditing) {
+        card.classList.toggle("is-editing", isEditing);
+        view.hidden = isEditing;
+        editor.hidden = !isEditing;
+
+        if (isEditing) {
+          fillFormFromDisplay();
+        }
+      }
+
+      function syncEditHash(isEditing) {
+        const currentHash = window.location.hash;
+        const nextHash = isEditing ? "#profile-edit" : "#profile";
+        if (currentHash !== nextHash) {
+          history.replaceState(null, "", nextHash);
+        }
+      }
+
+      function buildUpdatedLabel() {
+        const formattedDate = new Intl.DateTimeFormat("ar-EG", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        }).format(new Date());
+
+        return "آخر تعديل " + formattedDate;
+      }
+
+      editButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          setEditingState(true);
+          syncEditHash(true);
+        });
+
+        if (button === statusPill) {
+          button.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setEditingState(true);
+              syncEditHash(true);
+            }
+          });
+        }
+      });
+
+      cancelButton?.addEventListener("click", function () {
+        setEditingState(false);
+        syncEditHash(false);
+      });
+
+      editor.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const formData = new FormData(editor);
+
+        displayFields.forEach((fieldName) => {
+          setFieldValue(fieldName, formData.get(fieldName));
+        });
+
+        if (updatedLabel) {
+          updatedLabel.textContent = buildUpdatedLabel();
+        }
+
+        setEditingState(false);
+        syncEditHash(false);
+      });
+
+      const shouldOpenEditorOnLoad = window.location.hash === "#profile-edit";
+      if (shouldOpenEditorOnLoad) {
+        setEditingState(true);
+        syncEditHash(true);
+      } else {
+        setEditingState(false);
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الحضور و الغياب - Sudanese Phoniatric</title>
+  <link rel="stylesheet" href="styles/app-tokens.css">
+  <link rel="stylesheet" href="styles/app-base.css">
+  <link rel="stylesheet" href="styles/app-layout.css">
+  <link rel="stylesheet" href="styles/app-components.css">
+  <link rel="stylesheet" href="styles/app-pages.css">
+    <link rel="stylesheet" href="styles/app-attendance.css">
+  <link rel="stylesheet" href="styles/app-responsive.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="desktop-sidebar">
+      <div class="desktop-sidebar-rail">
+        <div class="sidebar-header">
+          <a href="./dashboard.html" class="sidebar-logo sidebar-logo--top">
+            <img class="brand-mark__image brand-mark__image--contain" src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Sudanese Phoniatric logo">
+          </a>
+        </div>
+        <a href="./dashboard.html" class="sidebar-item" aria-label="لوحة التحكم">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="./library.html" class="sidebar-item" aria-label="المكتبة">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v16H7.5A2.5 2.5 0 0 0 5 21V5.5Zm0 0V19m4-12h6m-6 4h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./evaluations.html" class="sidebar-item" aria-label="التقييم والاستمارة">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8 4h8l4 4v12H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 0v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 12h6M10 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./beneficiaries.html" class="sidebar-item" aria-label="المستفيدين">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1M5.5 12.5A2.5 2.5 0 1 0 5.5 7.5M18.5 12.5A2.5 2.5 0 1 0 18.5 7.5M3 20v-.6A3.4 3.4 0 0 1 6.4 16M21 20v-.6a3.4 3.4 0 0 0-3.4-3.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+<a href="./members.html" class="sidebar-item" aria-label="الأعضاء">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M13 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 8v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1M5 8H3m2 5H2m3 5H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./families.html" class="sidebar-item" aria-label="الأسر">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5.5 13.5A2.5 2.5 0 1 0 5.5 8.5m13 5a2.5 2.5 0 1 0 0-5M8 19v-.5A3.5 3.5 0 0 1 11.5 15h1A3.5 3.5 0 0 1 16 18.5v.5M3 19v-.4A2.6 2.6 0 0 1 5.6 16M21 19v-.4a2.6 2.6 0 0 0-2.6-2.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./requests.html" class="sidebar-item" aria-label="الطلبات">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8.5 4h7a1.5 1.5 0 0 1 1.5 1.5v14h-10V5.5A1.5 1.5 0 0 1 8.5 4Zm1 0v2h5V4M10 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="./attendance.html" class="sidebar-item is-active" aria-label="الحضور و الغياب">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Zm3 7 2 2 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="./settings.html" class="sidebar-item" aria-label="الإعدادات">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.32 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-item sidebar-item--flag" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="12" fill="#EEF2FF"/><circle cx="13" cy="13" r="6.75" stroke="#6D48A8" stroke-width="1.5"/><path d="M6.75 13h12.5M13 6.25c1.95 1.94 3.1 4.27 3.1 6.75 0 2.48-1.15 4.81-3.1 6.75m0-13.5c-1.95 1.94-3.1 4.27-3.1 6.75 0 2.48 1.15 4.81 3.1 6.75" stroke="#6D48A8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <div class="page-brand">
+        <div class="page-brand-copy">
+          <p>الحضور و الغياب</p>
+          <h2>sudanesephoniatric</h2>
+        </div>
+      </div>
+      <div class="topbar-left">
+        <button class="topbar-bell" aria-label="الإشعارات">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 17h12m-9 0a3 3 0 0 0 6 0m-7-8a4 4 0 1 1 8 0c0 4 1.5 5 1.5 5h-11S8 13 8 9Z" stroke="#2F2D3D" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="topbar-account" data-account-menu>
+          
+          <div class="account-card">
+            <div class="account-avatar">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <div class="account-meta">
+              <div class="account-name">sudanesephoniatric</div>
+              <div class="account-title">المالك</div>
+            </div>
+            <div class="account-avatar">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1M5.5 12.5A2.5 2.5 0 1 0 5.5 7.5M18.5 12.5A2.5 2.5 0 1 0 18.5 7.5M3 20v-.6A3.4 3.4 0 0 1 6.4 16M21 20v-.6a3.4 3.4 0 0 0-3.4-3.4" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+          <button class="mini-switcher" type="button" aria-label="قائمة الحساب" aria-expanded="false" data-account-toggle>
+            <div class="account-avatar">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 8v-1a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v1M5.5 12.5A2.5 2.5 0 1 0 5.5 7.5M18.5 12.5A2.5 2.5 0 1 0 18.5 7.5M3 20v-.6A3.4 3.4 0 0 1 6.4 16M21 20v-.6a3.4 3.4 0 0 0-3.4-3.4" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="m5 8 5 5 5-5" stroke="#2F2D3D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="account-dropdown">
+            <a href="./settings.html" class="account-dropdown-item">ملف التعريف</a>
+            <a href="./settings.html" class="account-dropdown-item">تغيير كلمة المرور</a>
+            <a href="register-login.html" class="account-dropdown-item">تسجيل الخروج</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-topline">
+      <div class="mobile-topline-start">
+        <div class="ghost-avatar ghost-avatar--plain">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="mobile-bell">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 17h12m-9 0a3 3 0 0 0 6 0m-7-8a4 4 0 1 1 8 0c0 4 1.5 5 1.5 5h-11S8 13 8 9Z" stroke="#2F2D3D" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+      <div class="mobile-topline-end">
+        <button data-menu-open class="mobile-menu-btn" aria-label="فتح القائمة">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 8h14M5 12h14M5 16h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="brand-mark brand-mark--mobile">
+          <img class="brand-mark__image brand-mark__image--contain" src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Sudanese Phoniatric logo">
+        </div>
+      </div>
+    </div>
+    <div class="mobile-account">
+      <div class="mobile-account-card">
+        <div class="mobile-avatar">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="account-meta">
+          <div class="account-name mobile-account-name">sudanesephoniatric</div>
+          <div class="account-title mobile-account-title">المالك</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-overlay" data-mobile-overlay>
+      <div class="mobile-overlay-header">
+        <div class="mobile-overlay-brand">
+          <img class="brand-mark__image brand-mark__image--contain" src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Sudanese Phoniatric logo">
+        </div>
+        <button data-menu-close class="mobile-close-btn" aria-label="إغلاق القائمة">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="mobile-overlay-nav">
+        <div class="mobile-nav-card">
+          <div class="mobile-avatar">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M7 20V8l5-3 5 3v12M4 20h16M10 10h1m2 0h1m-4 3h1m2 0h1m-4 3h1m2 0h1" stroke="#7C87AF" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div class="account-meta">
+            <div class="account-name mobile-account-name">sudanesephoniatric</div>
+            <div class="account-title mobile-account-title">المالك</div>
+          </div>
+        </div>
+        <div class="mobile-nav-list">
+<a href="./members.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M13 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 8v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1M5 8H3m2 5H2m3 5H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>الأعضاء</span>
+          </a>
+          <a href="./families.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM5.5 13.5A2.5 2.5 0 1 0 5.5 8.5m13 5a2.5 2.5 0 1 0 0-5M8 19v-.5A3.5 3.5 0 0 1 11.5 15h1A3.5 3.5 0 0 1 16 18.5v.5M3 19v-.4A2.6 2.6 0 0 1 5.6 16M21 19v-.4a2.6 2.6 0 0 0-2.6-2.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>الأسر</span>
+          </a>
+          <a href="./requests.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8.5 4h7a1.5 1.5 0 0 1 1.5 1.5v14h-10V5.5A1.5 1.5 0 0 1 8.5 4Zm1 0v2h5V4M10 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>الطلبات</span>
+          </a>
+          <a href="./attendance.html" class="mobile-nav-item is-active">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Zm3 7 2 2 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>الحضور و الغياب</span>
+          </a>
+          <a href="./settings.html" class="mobile-nav-item">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.32 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>الإعدادات</span>
+          </a>
+          <div class="mobile-nav-flag">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="12" fill="#EEF2FF"/><circle cx="13" cy="13" r="6.75" stroke="#6D48A8" stroke-width="1.5"/><path d="M6.75 13h12.5M13 6.25c1.95 1.94 3.1 4.27 3.1 6.75 0 2.48-1.15 4.81-3.1 6.75m0-13.5c-1.95 1.94-3.1 4.27-3.1 6.75 0 2.48 1.15 4.81 3.1 6.75" stroke="#6D48A8" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="page-shell page-shell--attendance">
+      <main class="main-panel">
+        <section class="attendance-page">
+          <section class="attendance-view attendance-view--list is-active" data-attendance-view="list">
+            <div class="attendance-hero-panel">
+              <div class="attendance-hero-top">
+                <div class="attendance-title-wrap">
+                  <h1>الحضور و الغياب</h1>
+                </div>
+                <div class="attendance-main-actions">
+                  <button class="attendance-kebab-btn" type="button" aria-label="المزيد" data-attendance-tools-toggle aria-expanded="false">
+                    <div></div>
+                  </button>
+                  <div class="attendance-tools-menu" data-attendance-tools-menu aria-hidden="true">
+                    <button class="attendance-tools-item" type="button">تعيين أيام الأسبوع</button>
+                    <button class="attendance-tools-item" type="button">إضافة إجازة</button>
+                    <button class="attendance-tools-item attendance-tools-item--purple" type="button">تاريخ الإجازات</button>
+                    <button class="attendance-tools-item attendance-tools-item--dark" type="button">تخصيص أيام المستفيدين</button>
+                  </div>
+                  <button class="attendance-print-btn" type="button" data-open-modal="attendance-print-modal">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    طباعة الجدول
+                  </button>
+                </div>
+              </div>
+
+              <div class="attendance-filter-row">
+                <div class="attendance-filter-box attendance-filter-box--search">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.2-3.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  <span>كلمات رئيسية</span>
+                </div>
+                <button class="attendance-filter-box attendance-filter-box--group" type="button">
+                  <span class="attendance-filter-icon"><svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 8 5 5 5-5" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="attendance-filter-copy">
+                    <span class="attendance-filter-label">المجموعة</span>
+                    <span class="attendance-filter-value">الكل</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="attendance-board-shell">
+              <div class="attendance-toolbar">
+                <button class="attendance-edit-btn" type="button" data-attendance-target="edit">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m14 4 6 6M4 20l4.5-1 10-10a2.8 2.8 0 0 0-4-4L5 15l-1 5Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  تعديل الحضور الأسبوعي
+                </button>
+                <div class="attendance-toolbar-left">
+                  <button class="attendance-arrow-btn" type="button" aria-label="التالي">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <button class="attendance-arrow-btn" type="button" aria-label="السابق">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m15 5-7 7 7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <button class="attendance-range-date" type="button" data-attendance-calendar-toggle aria-expanded="false">03 مايو 2026 - 09 مايو 2026 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                  <div class="attendance-range-pill">التقويم الميلادي فقط <svg width="12" height="12" viewBox="0 0 20 20" fill="none"><path d="m5 8 5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                </div>
+              </div>
+              <div class="attendance-calendar-panel" data-attendance-calendar-panel aria-hidden="true">
+                <button class="attendance-calendar-close" type="button" aria-label="إغلاق">×</button>
+                <div class="attendance-calendar-head">مايو 2026</div>
+                <div class="attendance-calendar-grid">
+                  <span>أحد</span><span>إثنين</span><span>ثلاثاء</span><span>أربعاء</span><span>خميس</span><span>جمعة</span><span>سبت</span>
+                  <button type="button">3</button><button type="button">4</button><button type="button">5</button><button type="button">6</button><button type="button">7</button><button type="button">8</button><button type="button" class="is-active">9</button>
+                  <button type="button">10</button><button type="button">11</button><button type="button">12</button><button type="button">13</button><button type="button">14</button><button type="button">15</button><button type="button">16</button>
+                </div>
+              </div>
+
+              <div class="attendance-week-head">
+                <div class="attendance-week-day is-current"><strong>السبت، 9 مايو 2026</strong><span>0/1 حاضر</span></div>
+                <div class="attendance-week-day"><strong>الجمعة، 8 مايو 2026</strong><span>0/1 حاضر</span></div>
+                <div class="attendance-week-day"><strong>الخميس، 7 مايو 2026</strong><span>0/1 حاضر</span></div>
+                <div class="attendance-week-day"><strong>الأربعاء، 6 مايو 2026</strong><span>0/1 حاضر</span></div>
+                <div class="attendance-week-day"><strong>الثلاثاء، 5 مايو 2026</strong><span>0/1 حاضر</span></div>
+                <div class="attendance-week-day"><strong>الإثنين، 4 مايو 2026</strong><span>0/1 حاضر</span></div>
+                <div class="attendance-week-day"><strong>الأحد، 3 مايو 2026</strong><span>0/1 حاضر</span></div>
+                <div class="attendance-week-info-title">معلومات المستفيد</div>
+              </div>
+
+              <div class="attendance-week-row">
+                <div class="attendance-cell"></div>
+                <div class="attendance-cell"></div>
+                <div class="attendance-cell"></div>
+                <div class="attendance-cell"></div>
+                <div class="attendance-cell"></div>
+                <div class="attendance-cell"></div>
+                <div class="attendance-cell"></div>
+                <article class="attendance-beneficiary-card">
+                  <button class="attendance-beneficiary-kebab" type="button" aria-label="خيارات">
+                    <span></span><span></span><span></span>
+                  </button>
+                  <div class="attendance-beneficiary-avatar">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-4.5 7v-.7A3.8 3.8 0 0 1 11.3 15h1.4a3.8 3.8 0 0 1 3.8 3.8v.7" stroke="#7C87AF" stroke-width="1.7" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="attendance-beneficiary-copy">
+                    <strong>...hamed Ahmed</strong>
+                    <span>الحضور 0/0 ايام</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="attendance-view attendance-view--edit" data-attendance-view="edit" hidden>
+            <div class="attendance-edit-head">
+              <h2>تعديل حضور (03 مايو 2026 - 09 مايو 2026)</h2>
+              <div class="attendance-edit-actions">
+                <button class="attendance-save-btn" type="button" data-attendance-target="list">حفظ التغييرات</button>
+                <button class="attendance-cancel-btn" type="button" data-attendance-target="list">تجاهل</button>
+              </div>
+            </div>
+
+            <div class="attendance-week-head">
+              <div class="attendance-week-day is-current"><strong>السبت، 9 مايو 2026</strong><span>0/1 حاضر</span></div>
+              <div class="attendance-week-day"><strong>الجمعة، 8 مايو 2026</strong><span>0/1 حاضر</span></div>
+              <div class="attendance-week-day"><strong>الخميس، 7 مايو 2026</strong><span>0/1 حاضر</span></div>
+              <div class="attendance-week-day"><strong>الأربعاء، 6 مايو 2026</strong><span>0/1 حاضر</span></div>
+              <div class="attendance-week-day"><strong>الثلاثاء، 5 مايو 2026</strong><span>0/1 حاضر</span></div>
+              <div class="attendance-week-day"><strong>الإثنين، 4 مايو 2026</strong><span>0/1 حاضر</span></div>
+              <div class="attendance-week-day"><strong>الأحد، 3 مايو 2026</strong><span>0/1 حاضر</span></div>
+              <div class="attendance-week-info-title">معلومات المستفيد</div>
+            </div>
+
+            <div class="attendance-week-row">
+              <div class="attendance-cell"></div>
+              <div class="attendance-cell"></div>
+              <div class="attendance-cell"></div>
+              <div class="attendance-cell"></div>
+              <div class="attendance-cell"></div>
+              <div class="attendance-cell"></div>
+              <div class="attendance-cell"></div>
+              <article class="attendance-beneficiary-card">
+                <button class="attendance-beneficiary-kebab" type="button" aria-label="خيارات">
+                  <span></span><span></span><span></span>
+                </button>
+                <div class="attendance-beneficiary-avatar">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-4.5 7v-.7A3.8 3.8 0 0 1 11.3 15h1.4a3.8 3.8 0 0 1 3.8 3.8v.7" stroke="#7C87AF" stroke-width="1.7" stroke-linecap="round"/></svg>
+                </div>
+                <div class="attendance-beneficiary-copy">
+                  <strong>...hamed Ahmed</strong>
+                  <span>الحضور 0/0 ايام</span>
+                </div>
+              </article>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div><div class="app-footer-wrap">
+      <footer class="footer-bar">
+        <span>سياسة الخصوصية</span>
+        <span>ملفات الارتباط</span>
+        <span>الشروط والأحكام</span>
+        <span>جميع الحقوق محفوظة لينمو © 2026</span>
+      </footer>
+    </div>
+
+    <a class="floating-whatsapp" href="https://wa.me/966556106020" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Support">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 0 1-11.8 7l-4.2 1 1.1-4.1A8 8 0 1 1 20 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 8.8c.2-.4.4-.4.8-.4h.6c.2 0 .5.1.6.5l.5 1.6c.1.3 0 .5-.1.7l-.5.6c-.2.2-.1.4 0 .6a6 6 0 0 0 2.8 2.5c.2.1.4.1.6-.1l.6-.7c.2-.2.4-.3.7-.2l1.5.5c.4.1.5.3.5.6v.7c0 .3-.1.5-.4.7-.5.3-1.2.5-1.9.4-1.4-.2-2.8-.9-4-2-1.1-1.1-2-2.5-2.2-4-.1-.6 0-1.3.3-1.8Z" fill="currentColor"/></svg>
+    </a>
+  </div>
+
+  
+  <div class="modal-overlay" id="attendance-print-modal">
+    <div class="modal-dialog modal-dialog--attendance-print">
+      <button class="modal-close modal-close--icon" data-close-modal aria-label="إغلاق">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <h2 class="modal-title">طباعة الجدول</h2>
+
+      <div class="modal-select-wrap attendance-modal-select">
+        <span class="modal-select-trigger">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="m5 8 5 5 5-5" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div style="flex:1">
+          <span class="select-label">اختر المستفيدين <em>*</em></span>
+          <div class="select-value">اختر المستفيدين</div>
+        </div>
+      </div>
+
+      <h3 class="attendance-modal-subtitle">نطاق الأسابيع</h3>
+      <div class="attendance-modal-weeks">
+        <div class="modal-select-wrap attendance-modal-date">
+          <div style="flex:1">
+            <span class="select-label">أسبوع البداية <em>*</em></span>
+            <div class="select-value">اسبوع البداية</div>
+          </div>
+          <span class="attendance-date-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="modal-select-wrap attendance-modal-date">
+          <div style="flex:1">
+            <span class="select-label">أسبوع النهاية <em>*</em></span>
+            <div class="select-value">اسبوع النهاية</div>
+          </div>
+          <span class="attendance-date-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </div>
+
+      <label class="attendance-modal-switch">
+        <span>تضمين أسباب الغياب</span>
+        <button class="modal-toggle is-active" type="button" aria-label="تضمين أسباب الغياب"></button>
+      </label>
+      <label class="attendance-modal-switch">
+        <span>تضمين نسب الحضور والغياب</span>
+        <button class="modal-toggle is-active" type="button" aria-label="تضمين نسب الحضور والغياب"></button>
+      </label>
+
+      <div class="modal-actions attendance-modal-actions">
+        <button class="btn-save" data-close-modal>إصدار</button>
+        <button class="btn-cancel" data-close-modal>إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script src="js/attendance.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
