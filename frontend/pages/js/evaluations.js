@@ -6,8 +6,12 @@
   let diagnosisPicker, beneficiaryPicker, startBeneficiaryPicker, editDiagnosisPicker;
   let activeSideId = null;
   let expandedSideId = null;
+  const NO_EXPANDED_SIDE = '__none__';
+  const NO_OPEN_GOAL_NODE = '__none__';
+  const activeItemTabs = new Map();
   let showAddSideForm = false;
   let showAddItemForm = false;
+  let activeSideMenuId = null;
   let currentPage = 1;
   let pageSize = 10;
   const sectionInput = document.querySelector('[name="section_title"]');
@@ -21,6 +25,13 @@
   const itemOptionsField = document.querySelector('[data-item-options-field]');
   const startEvaluationTitle = document.querySelector('[data-start-eval-title]');
   const startBeneficiarySelect = document.querySelector('[data-start-beneficiary-select]');
+  const editSideEvalTitleInput = document.querySelector('[name="edit_side_eval_title"]');
+  const editSideTitleInput = document.querySelector('[name="edit_side_title"]');
+  const suggestedGoalsState = {
+    activeRow: null,
+    openAspectId: null,
+    openLongGoalId: null
+  };
 
   const views = Array.from(document.querySelectorAll('[data-view]'));
   const listRoot = document.querySelector('[data-evaluations-list]');
@@ -208,6 +219,236 @@
     });
   }
 
+  function escapeHtml(value){
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function getSuggestedGoalsTree(){
+    const defaultTree = [
+      {
+        id: 'default-curriculum',
+        title: 'منهج التعليم - تعليم خاص',
+        aspects: [
+          {
+            id: 'communication-skills',
+            title: 'المهارات المعرفية',
+            longGoals: [
+              {
+                id: 'visual-awareness',
+                title: 'تنمية قدرة الإدراك البصري لدى الطفل',
+                shortGoals: [
+                  'أن يطابق الطفل بين أشكال الأشياء والكلمات المساعدة',
+                  'أن يطابق الطفل بين أشكال الحروف أو الأرقام المساعدة',
+                  'أن يطابق الطفل ثنائية عناصر أو أكثر بصورة مصغرة مع نموذج الصورة المرسومة في اللوح',
+                  'أن يطابق الطفل بين مجموعتين من الأشكال الهندسية المتماثلة'
+                ]
+              }
+            ]
+          },
+          {
+            id: 'social-skills',
+            title: 'التكيف الاجتماعي',
+            longGoals: [
+              {
+                id: 'daily-interaction',
+                title: 'زيادة التفاعل الاجتماعي داخل المواقف اليومية',
+                shortGoals: [
+                  'أن ينتظر الطفل دوره أثناء النشاط الجماعي',
+                  'أن يشارك الطفل الأدوات مع الزملاء عند الطلب'
+                ]
+              }
+            ]
+          },
+          {
+            id: 'language-skills',
+            title: 'المهارات اللغوية',
+            longGoals: [
+              {
+                id: 'expressive-language',
+                title: 'تنمية مهارات اللغة التعبيرية',
+                shortGoals: (window.MockData?.goals || []).slice(0, 4)
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    return defaultTree.map((curriculum)=>({
+      ...curriculum,
+      aspects: (curriculum.aspects || []).map((aspect)=>({
+        ...aspect,
+        longGoals: (aspect.longGoals || []).map((longGoal)=>({
+          ...longGoal,
+          shortGoals: (longGoal.shortGoals || []).map((goal, index)=>(
+            typeof goal === 'string'
+              ? {
+                id: `${longGoal.id || 'long'}-short-${index}`,
+                title: goal,
+                collectionType: 'المساعدات',
+                curriculumTitle: curriculum.title,
+                aspectTitle: aspect.title,
+                longGoalTitle: longGoal.title
+              }
+              : {
+                id: goal.id || `${longGoal.id || 'long'}-short-${index}`,
+                title: goal.title || goal.name || '',
+                collectionType: goal.collectionType || 'المساعدات',
+                curriculumTitle: curriculum.title,
+                aspectTitle: aspect.title,
+                longGoalTitle: longGoal.title
+              }
+          ))
+        }))
+      }))
+    }));
+  }
+
+  function readOptionGoals(row){
+    try {
+      return JSON.parse(row?.dataset.selectedGoals || '[]');
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function writeOptionGoals(row, goals){
+    if (!row) return;
+    row.dataset.selectedGoals = JSON.stringify(goals || []);
+    const button = row.querySelector('[data-open-goals-picker]');
+    const countNode = button?.querySelector('[data-goals-count]');
+    if (countNode) {
+      const count = (goals || []).length;
+      countNode.textContent = count ? String(count) : '';
+      countNode.hidden = !count;
+    }
+  }
+
+  function closeSuggestedGoalsPanels(){
+    document.querySelectorAll('[data-suggested-goals-modal]').forEach((panel)=>panel.remove());
+    suggestedGoalsState.activeRow = null;
+  }
+
+  function renderSuggestedGoalsPanel(row){
+    if (!row) return;
+    closeSuggestedGoalsPanels();
+    suggestedGoalsState.activeRow = row;
+    const tree = getSuggestedGoalsTree();
+    const selected = readOptionGoals(row);
+    const selectedIds = new Set(selected.map((goal)=>goal.id));
+    const firstAspect = tree[0]?.aspects?.[0];
+    const firstLongGoal = firstAspect?.longGoals?.[0];
+    if (suggestedGoalsState.openAspectId === null) suggestedGoalsState.openAspectId = firstAspect?.id || NO_OPEN_GOAL_NODE;
+    if (suggestedGoalsState.openLongGoalId === null) suggestedGoalsState.openLongGoalId = firstLongGoal?.id || NO_OPEN_GOAL_NODE;
+
+    const panel = document.createElement('div');
+    panel.className = 'suggested-goals-modal';
+    panel.dataset.suggestedGoalsModal = 'true';
+    panel.innerHTML = `<div class="suggested-goals-dialog" role="dialog" aria-modal="true" aria-label="اقتراح من المكتبة">
+      <button class="suggested-goals-close" type="button" data-close-goals-modal aria-label="إغلاق">×</button>
+      <div class="suggested-goals-layout">
+        <aside class="suggested-goals-selected">
+          <div class="suggested-goals-side-title">الأهداف المحددة</div>
+          ${selected.length ? `<div class="suggested-goals-selected-list">
+            ${selected.map((goal)=>`<div class="suggested-goals-selected-row">
+              <button class="suggested-goals-selected-kebab" type="button" aria-label="خيارات الهدف">
+                <span></span><span></span><span></span>
+              </button>
+              <div class="suggested-goals-selected-text">${escapeHtml(goal.title)}</div>
+              <button class="suggested-goals-selected-chevron" type="button" aria-label="فتح الهدف">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>`).join('')}
+            <div class="suggested-goals-selected-actions">
+              <button class="suggested-goals-add-btn" type="button" data-close-goals-modal>إضافة</button>
+              <button class="suggested-goals-cancel-btn" type="button" data-close-goals-modal>إلغاء</button>
+            </div>
+          </div>` : `<div class="suggested-goals-selected-card">
+            <span>${selected.length ? `${selected.length} أهداف محددة` : 'لا يوجد أهداف محددة'}</span>
+            <span class="suggested-goals-selected-icon">i</span>
+          </div>`}
+        </aside>
+        <section class="suggested-goals-library">
+          <h2>اقتراح من المكتبة</h2>
+          <label class="suggested-goals-search">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="search" placeholder="ابحث الأهداف بالعنوان">
+          </label>
+          <div class="suggested-goals-tree">
+            ${tree.map((curriculum)=>`
+              <div class="suggested-goals-curriculum">
+                <div class="suggested-goals-curriculum-head">
+                  <span>${escapeHtml(curriculum.title)}</span>
+                  <span>${(curriculum.aspects || []).length} الجوانب</span>
+                </div>
+                <div class="suggested-goals-tab-title">الجوانب</div>
+                ${(curriculum.aspects || []).map((aspect)=>{
+                  const isAspectOpen = suggestedGoalsState.openAspectId === aspect.id;
+                  const longGoalsCount = (aspect.longGoals || []).length;
+                  const shortGoalsCount = (aspect.longGoals || []).reduce((total, goal)=>total + (goal.shortGoals || []).length, 0);
+                  return `<div class="suggested-goals-aspect ${isAspectOpen ? 'is-open' : ''}">
+                    <div class="suggested-goals-row suggested-goals-row--aspect">
+                      <button class="suggested-goals-toggle ${isAspectOpen ? 'is-open' : ''}" type="button" data-goals-toggle-aspect="${escapeHtml(aspect.id)}" aria-label="فتح أو غلق الجانب">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </button>
+                      <span class="suggested-goals-row-title">${escapeHtml(aspect.title)}</span>
+                      <span class="suggested-goals-icon" aria-hidden="true">▣</span>
+                      <span class="suggested-goals-count">${shortGoalsCount} الأهداف الطويلة</span>
+                    </div>
+                    ${isAspectOpen ? `<div class="suggested-goals-children">
+                      <div class="suggested-goals-section-title">${longGoalsCount} الأهداف الطويلة</div>
+                      ${(aspect.longGoals || []).map((longGoal)=>{
+                        const isLongOpen = suggestedGoalsState.openLongGoalId === longGoal.id;
+                        return `<div class="suggested-goals-long ${isLongOpen ? 'is-open' : ''}">
+                          <div class="suggested-goals-row suggested-goals-row--long">
+                            <button class="suggested-goals-toggle ${isLongOpen ? 'is-open' : ''}" type="button" data-goals-toggle-long="${escapeHtml(longGoal.id)}" aria-label="فتح أو غلق الهدف الطويل">
+                              <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                            <span class="suggested-goals-row-title">${escapeHtml(longGoal.title)}</span>
+                            <span class="suggested-goals-icon" aria-hidden="true">▣</span>
+                            <span class="suggested-goals-count">${(longGoal.shortGoals || []).length} الأهداف القصيرة</span>
+                          </div>
+                          ${isLongOpen ? `<div class="suggested-goals-short-list">
+                            <div class="suggested-goals-section-title">الأهداف القصيرة</div>
+                            ${(longGoal.shortGoals || []).map((goal)=>`
+                              <label class="suggested-goals-short">
+                                <input type="checkbox" data-suggested-goal="${escapeHtml(goal.id)}" ${selectedIds.has(goal.id) ? 'checked' : ''}>
+                                <span>${escapeHtml(goal.title)}</span>
+                                <small>${escapeHtml(goal.collectionType)}</small>
+                              </label>
+                            `).join('')}
+                          </div>` : ''}
+                        </div>`;
+                      }).join('')}
+                    </div>` : ''}
+                  </div>`;
+                }).join('')}
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      </div>
+    </div>`;
+    document.body.appendChild(panel);
+  }
+
+  function toggleSuggestedGoal(row, goalId, checked){
+    const allGoals = getSuggestedGoalsTree()
+      .flatMap((curriculum)=>curriculum.aspects || [])
+      .flatMap((aspect)=>aspect.longGoals || [])
+      .flatMap((longGoal)=>longGoal.shortGoals || []);
+    const goal = allGoals.find((item)=>item.id === goalId);
+    if (!goal) return;
+    const current = readOptionGoals(row).filter((item)=>item.id !== goalId);
+    writeOptionGoals(row, checked ? [...current, goal] : current);
+    renderSuggestedGoalsPanel(row);
+  }
+
   function buildOptionRow(){
     return `<div class="answer-row-wrapper" data-option-row>
       <div class="answer-inputs-flex">
@@ -226,7 +467,10 @@
           </svg>
         </button>
       </div>
-      <span class="badge-proposed-goals">الأهداف المقترحة</span>
+      <button class="badge-proposed-goals" type="button" data-open-goals-picker>
+        الأهداف المقترحة
+        <span data-goals-count hidden></span>
+      </button>
     </div>`;
   }
 
@@ -556,7 +800,7 @@
     const isAnswersTab = activeStructureTab === 'answers';
     if (isAnswersTab && validSections.length > 0) {
       const hasValidExpanded = validSections.some((section)=>section.id === expandedSideId);
-      if (!hasValidExpanded) {
+      if (!hasValidExpanded && expandedSideId !== NO_EXPANDED_SIDE) {
         expandedSideId = validSections[0].id;
       }
     } else {
@@ -567,6 +811,7 @@
       const isExpanded = expandedSideId === section.id;
       const isItemFormOpen = showAddItemForm && activeSideId === section.id;
       const hasItems = section.items.length > 0;
+      const activeItemTab = activeItemTabs.get(section.id) || 'items';
 
       return `<article class="structure-row-block${isExpanded ? ' is-expanded' : ''}">
         <div class="aspect-row-container">
@@ -580,13 +825,27 @@
               </div>
               <span class="aspect-title-text">${section.title}</span>
             </div>
-            <button class="aspect-actions-left" type="button" data-delete-section="${section.id}" aria-label="حذف الجانب">
+            <button class="aspect-actions-left" type="button" data-side-menu-toggle="${section.id}" aria-label="خيارات الجانب" aria-expanded="${activeSideMenuId === section.id ? 'true' : 'false'}">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="5" r="1.5" fill="currentColor"></circle>
                 <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
                 <circle cx="12" cy="19" r="1.5" fill="currentColor"></circle>
               </svg>
             </button>
+            <div class="side-actions-menu${activeSideMenuId === section.id ? ' is-open' : ''}" data-side-menu="${section.id}">
+              <button type="button" data-side-archive="${section.id}">
+                <span>أرشفة</span>
+              </button>
+              <button type="button" data-side-edit="${section.id}">
+                <span>تعديل الجانب</span>
+              </button>
+              <button type="button" data-delete-section="${section.id}" class="is-danger">
+                <span>حذف</span>
+              </button>
+              <button type="button" data-add-item="${section.id}" class="is-add-item">
+                <span>بند جديد</span>
+              </button>
+            </div>
           </div>
           <button class="toggle-collapse-btn${isExpanded ? '' : ' closed'}" type="button" data-toggle-side="${section.id}" aria-label="${isExpanded ? 'طي الجانب' : 'فتح الجانب'}">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -597,8 +856,8 @@
         ${isExpanded ? `<div class="aspect-details-area">
           <div class="tabs-header-row aspect-inner-tabs">
             <div class="tabs-group">
-              <button class="tab-button active" type="button">البنود</button>
-              <button class="tab-button" type="button">مؤرشف</button>
+              <button class="tab-button ${activeItemTab === 'items' ? 'active' : ''}" type="button" data-item-tab="${section.id}:items">البنود</button>
+              <button class="tab-button ${activeItemTab === 'archived' ? 'active' : ''}" type="button" data-item-tab="${section.id}:archived">مؤرشف</button>
             </div>
             <button class="btn-green-rounded" type="button" data-add-item="${section.id}">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -609,14 +868,21 @@
               أضف بند جديد
             </button>
           </div>
-          ${hasItems ? `<div class="items-list">${section.items.map((item)=>`<article class="item-row"><strong>${item.title}</strong><span>${item.type === 'multiple' ? 'اختيار متعدد' : 'مفتوح'}</span><button class="outline-btn" type="button" data-delete-item="${section.id}:${item.id}">حذف</button></article>`).join('')}</div>` : (!isItemFormOpen ? `<div class="warning-empty-state">
+          ${activeItemTab === 'archived' ? `<div class="warning-empty-state warning-empty-state--archived">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>لا يوجد بنود مؤرشفة</span>
+          </div>` : (hasItems ? `<div class="items-list">${section.items.map((item)=>`<article class="item-row"><strong>${item.title}</strong><span>${item.type === 'multiple' ? 'اختيار متعدد' : 'مفتوح'}</span><button class="outline-btn" type="button" data-delete-item="${section.id}:${item.id}">حذف</button></article>`).join('')}</div>` : (!isItemFormOpen ? `<div class="warning-empty-state">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="16" x2="12" y2="12"></line>
               <line x1="12" y1="8" x2="12.01" y2="8"></line>
             </svg>
             <span>أنشئ بند جديد</span>
-          </div>` : '')}
+          </div>` : ''))}
         </div>` : ''}
       </article>`;
     }).join('');
@@ -641,6 +907,33 @@
   }
 
   document.addEventListener('click', (e)=>{
+    if (e.target.closest('[data-close-goals-modal]') || e.target.matches('[data-suggested-goals-modal]')) {
+      closeSuggestedGoalsPanels();
+      return;
+    }
+
+    const aspectGoalsToggle = e.target.closest('[data-goals-toggle-aspect]');
+    if (aspectGoalsToggle) {
+      suggestedGoalsState.openAspectId = suggestedGoalsState.openAspectId === aspectGoalsToggle.dataset.goalsToggleAspect
+        ? NO_OPEN_GOAL_NODE
+        : aspectGoalsToggle.dataset.goalsToggleAspect;
+      suggestedGoalsState.openLongGoalId = NO_OPEN_GOAL_NODE;
+      renderSuggestedGoalsPanel(suggestedGoalsState.activeRow);
+      return;
+    }
+
+    const longGoalsToggle = e.target.closest('[data-goals-toggle-long]');
+    if (longGoalsToggle) {
+      suggestedGoalsState.openLongGoalId = suggestedGoalsState.openLongGoalId === longGoalsToggle.dataset.goalsToggleLong
+        ? NO_OPEN_GOAL_NODE
+        : longGoalsToggle.dataset.goalsToggleLong;
+      renderSuggestedGoalsPanel(suggestedGoalsState.activeRow);
+      return;
+    }
+
+    if (!e.target.closest('[data-side-menu]') && !e.target.closest('[data-side-menu-toggle]')) {
+      activeSideMenuId = null;
+    }
     if (!e.target.closest('[data-card-menu]')) {
       closeAllCardMenus();
     }
@@ -667,7 +960,8 @@
     if (toggleSide) {
       const sideId = toggleSide.dataset.toggleSide;
       const wasExpanded = expandedSideId === sideId;
-      expandedSideId = wasExpanded ? null : sideId;
+      expandedSideId = wasExpanded ? NO_EXPANDED_SIDE : sideId;
+      activeSideMenuId = null;
       if (wasExpanded && activeSideId === sideId && showAddItemForm) {
         closeAddItemForm();
         return;
@@ -676,8 +970,48 @@
       return;
     }
 
+    const itemTab = e.target.closest('[data-item-tab]');
+    if (itemTab) {
+      const [sideId, tab] = itemTab.dataset.itemTab.split(':');
+      activeItemTabs.set(sideId, tab === 'archived' ? 'archived' : 'items');
+      renderStructure();
+      return;
+    }
+
+    const toggleSideMenu = e.target.closest('[data-side-menu-toggle]');
+    if (toggleSideMenu) {
+      const sideId = toggleSideMenu.dataset.sideMenuToggle;
+      activeSideMenuId = activeSideMenuId === sideId ? null : sideId;
+      renderStructure();
+      return;
+    }
+
+    const archiveSide = e.target.closest('[data-side-archive]');
+    if (archiveSide) {
+      activeSideMenuId = null;
+      FlowModal.toast('تمت الأرشفة');
+      renderStructure();
+      return;
+    }
+
+    const editSide = e.target.closest('[data-side-edit]');
+    if (editSide) {
+      const sideId = editSide.dataset.sideEdit;
+      const evaluation = getActiveEval();
+      const side = evaluation?.sections?.find((section) => section.id === sideId);
+      if (!evaluation || !side) return;
+      activeSideId = sideId;
+      if (editSideEvalTitleInput) editSideEvalTitleInput.value = evaluation.title || '';
+      if (editSideTitleInput) editSideTitleInput.value = side.title || '';
+      activeSideMenuId = null;
+      FlowModal.open('edit-side-modal');
+      renderStructure();
+      return;
+    }
+
     const addItem = e.target.closest('[data-add-item]');
     if (addItem) {
+      activeSideMenuId = null;
       openAddItemForm(addItem.dataset.addItem);
       return;
     }
@@ -713,6 +1047,7 @@
         activeSideId = null;
         showAddItemForm = false;
       }
+      activeSideMenuId = null;
       renderStructure();
       return;
     }
@@ -725,7 +1060,18 @@
     }
   });
 
+  document.addEventListener('change', (e)=>{
+    const suggestedGoal = e.target.closest('[data-suggested-goal]');
+    if (suggestedGoal) {
+      toggleSuggestedGoal(suggestedGoalsState.activeRow, suggestedGoal.dataset.suggestedGoal, suggestedGoal.checked);
+    }
+  });
+
   document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape' && document.querySelector('[data-suggested-goals-modal]')) {
+      closeSuggestedGoalsPanels();
+      return;
+    }
     if (e.key === 'Escape' && showAddItemForm && addItemModal && !addItemModal.hidden) {
       closeAddItemForm();
     }
@@ -789,10 +1135,48 @@
   addItemForm?.addEventListener('change', (e)=>{
     if (e.target.name === 'item_type') {
       syncItemTypeFields();
+      return;
+    }
+
+    const suggestedGoal = e.target.closest('[data-suggested-goal]');
+    if (suggestedGoal) {
+      const row = suggestedGoal.closest('[data-option-row]');
+      toggleSuggestedGoal(row, suggestedGoal.dataset.suggestedGoal, suggestedGoal.checked);
     }
   });
 
   addItemForm?.addEventListener('click', (e)=>{
+    const goalsButton = e.target.closest('[data-open-goals-picker]');
+    if (goalsButton) {
+      const row = goalsButton.closest('[data-option-row]');
+      const hasOpenPanel = !!document.querySelector('[data-suggested-goals-modal]') && suggestedGoalsState.activeRow === row;
+      if (hasOpenPanel) {
+        closeSuggestedGoalsPanels();
+      } else {
+        renderSuggestedGoalsPanel(row);
+      }
+      return;
+    }
+
+    const aspectToggle = e.target.closest('[data-goals-toggle-aspect]');
+    if (aspectToggle) {
+      suggestedGoalsState.openAspectId = suggestedGoalsState.openAspectId === aspectToggle.dataset.goalsToggleAspect
+        ? NO_OPEN_GOAL_NODE
+        : aspectToggle.dataset.goalsToggleAspect;
+      suggestedGoalsState.openLongGoalId = NO_OPEN_GOAL_NODE;
+      renderSuggestedGoalsPanel(aspectToggle.closest('[data-option-row]'));
+      return;
+    }
+
+    const longToggle = e.target.closest('[data-goals-toggle-long]');
+    if (longToggle) {
+      suggestedGoalsState.openLongGoalId = suggestedGoalsState.openLongGoalId === longToggle.dataset.goalsToggleLong
+        ? NO_OPEN_GOAL_NODE
+        : longToggle.dataset.goalsToggleLong;
+      renderSuggestedGoalsPanel(longToggle.closest('[data-option-row]'));
+      return;
+    }
+
     const methodCard = e.target.closest('.method-card');
     if (methodCard) {
       const radio = methodCard.querySelector('[name="item_type"]');
@@ -821,7 +1205,7 @@
       ? Array.from(document.querySelectorAll('[data-option-row]')).map((row)=>({
           label: row.querySelector('[name="option_label"]').value.trim(),
           score: Number(row.querySelector('[name="option_score"]').value || 0),
-          goals: []
+          goals: readOptionGoals(row)
         })).filter((x)=>x.label)
       : [];
 
@@ -873,6 +1257,19 @@
 
   editDiagnosisPicker = new MultiSelect(document.querySelector('[data-edit-diagnosis-select]'), { options: MockData.diagnoses, placeholder: 'اختيار' });
   document.querySelector('[data-save-edit-eval]')?.addEventListener('click', ()=>{ const ev = getActiveEval(); if(!ev) return; ev.title = document.querySelector('[name="edit_title"]').value.trim() || ev.title; ev.diagnosis = editDiagnosisPicker.getValue(); ev.description = document.querySelector('[name="edit_description"]').value; EvalStorage.saveEvaluation(ev); FlowModal.close('edit-evaluation-modal'); renderList(); renderStructure(); });
+  document.querySelector('[data-save-side-edit]')?.addEventListener('click', ()=>{
+    const ev = getActiveEval();
+    if (!ev || !activeSideId) return;
+    const nextTitle = String(editSideTitleInput?.value || '').trim();
+    if (!nextTitle) return FlowModal.toast('اسم الجانب مطلوب');
+    const side = ev.sections?.find((section) => section.id === activeSideId);
+    if (!side) return;
+    side.title = nextTitle;
+    EvalStorage.saveEvaluation(ev);
+    FlowModal.close('edit-side-modal');
+    renderStructure();
+    FlowModal.toast('تم التعديل');
+  });
 
   document.querySelector('[data-view-sections]')?.addEventListener('change', (e)=>{ const ev = getActiveEval(); if(!ev) return; const b = ev.beneficiaries[0] || 'MRS AMA SIDDIG'; const rs = EvalStorage.getResponses(ev.id,b); if(e.target.type==='radio'){ rs[e.target.name]=e.target.value; EvalStorage.saveResponses(ev.id,b,rs); renderView(); } });
   document.querySelector('[data-view-sections]')?.addEventListener('input', (e)=>{ const t=e.target.closest('[data-open-answer]'); if(!t) return; const ev=getActiveEval(); const b = ev.beneficiaries[0] || 'MRS AMA SIDDIG'; const rs=EvalStorage.getResponses(ev.id,b); rs[t.dataset.openAnswer]=t.value; EvalStorage.saveResponses(ev.id,b,rs); renderView(); });

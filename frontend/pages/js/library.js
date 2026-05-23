@@ -1571,6 +1571,7 @@
       renderShortGoalForm();
     }
     renderLucideIcons();
+    syncMasteryRangeFill();
 
     if (state.pendingShortGoalScroll && createScreen && !createScreen.hidden) {
       const target = state.createStep === "short-goal-form"
@@ -2072,7 +2073,7 @@
             <div class="library-mastery-auto-layout">
               <div class="library-mastery-percent-layout">
                 <div class="library-mastery-percent-title">نسبة<br>الإتقان</div>
-                <div class="library-mastery-percent-box">${percent}</div>
+                <div class="library-mastery-percent-box" data-mastery-percent-value>${percent}</div>
                 <div class="library-mastery-slider-shell">
                   <input class="library-mastery-range" type="range" min="0" max="100" value="${percent}" data-mastery-range>
                 </div>
@@ -4104,7 +4105,10 @@
       const bounded = Math.max(0, Math.min(100, Number(nextValue) || 0));
       form.masteryPercent = bounded;
       const range = document.querySelector("[data-mastery-range]");
-      if (range instanceof HTMLInputElement) range.value = String(bounded);
+      if (range instanceof HTMLInputElement) {
+        range.value = String(bounded);
+        updateMasteryRangeFill(range, bounded);
+      }
     }
   });
 
@@ -4118,10 +4122,29 @@
     }
     if (target.matches("[data-mastery-range]")) {
       const form = getShortGoalForm();
-      form.masteryPercent = Math.max(0, Math.min(100, Number(target.value || 0)));
+      const bounded = Math.max(0, Math.min(100, Number(target.value || 0)));
+      form.masteryPercent = bounded;
+      updateMasteryRangeFill(target, bounded);
       return;
     }
   });
+
+  function updateMasteryRangeFill(rangeInput, value) {
+    if (!(rangeInput instanceof HTMLInputElement)) return;
+    const bounded = Math.max(0, Math.min(100, Number(value) || 0));
+    rangeInput.style.background = `linear-gradient(to left, #0bb79e 0%, #0bb79e ${bounded}%, #e5e7eb ${bounded}%, #e5e7eb 100%)`;
+    const percentNode = document.querySelector("[data-mastery-percent-value]");
+    if (percentNode) {
+      percentNode.textContent = String(bounded);
+    }
+  }
+
+  function syncMasteryRangeFill() {
+    const range = document.querySelector("[data-mastery-range]");
+    if (!(range instanceof HTMLInputElement)) return;
+    const bounded = Math.max(0, Math.min(100, Number(range.value || 0)));
+    updateMasteryRangeFill(range, bounded);
+  }
 
   createScreen?.addEventListener("click", (event) => {
     const actionBtn = event.target.closest("[data-create-mode], [data-create-submit], [data-create-cancel], [data-simple-done], [data-add-short-goal], [data-collection], [data-assist-type], [data-assistance-choice], [data-add-assistance-option], [data-delete-assistance-option], [data-add-task-item], [data-delete-task-item], [data-mastery-mode], [data-stepper-target], [data-create-short], [data-create-short-and-new], [data-cancel-short], [data-add-structured-aspect], [data-structured-aspect-cancel], [data-structured-aspect-create], [data-structured-aspect-create-more], [data-structured-done]");

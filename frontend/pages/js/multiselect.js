@@ -42,7 +42,7 @@
 
   MultiSelect.prototype.refreshTags = function(){
     const values = Array.from(this.selected);
-    this.tags.innerHTML = values.map((v)=>`<span class="ms-tag">${v}</span>`).join('');
+    this.tags.innerHTML = values.map((v)=>`<span class="ms-tag">${v}<button type="button" class="ms-tag-remove" data-remove-value="${v}" aria-label="حذف ${v}">×</button></span>`).join('');
     this.placeholder.style.display = values.length ? 'none' : 'inline';
     if (this.config.onChange) this.config.onChange(values);
   };
@@ -65,6 +65,17 @@
     this.list.addEventListener('change', (e)=>{
       const input = e.target;
       if (input.checked) this.selected.add(input.value); else this.selected.delete(input.value);
+      this.drawList(this.search.value);
+      this.refreshTags();
+    });
+
+    this.tags.addEventListener('click', (e)=>{
+      const removeBtn = e.target.closest('[data-remove-value]');
+      if (!removeBtn) return;
+      e.stopPropagation();
+      const value = removeBtn.getAttribute('data-remove-value');
+      if (!value) return;
+      this.selected.delete(value);
       this.drawList(this.search.value);
       this.refreshTags();
     });

@@ -7,49 +7,70 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/variables.css">
   <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/info-panel.css">
   <link rel="stylesheet" href="styles/form-panel.css">
   <link rel="stylesheet" href="styles/register-family-app.css">
 </head>
 <body class="family-app-page">
-  <div class="family-app-shell">
-    <header class="form-header family-app-header">
-      <div class="logo">
-        <a href="index.html">
-          <img src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Ynmo Logo" class="logo-img">
-        </a>
-      </div>
-    </header>
-
-    <main class="family-app-main">
-      <p class="login-prompt family-app-login">
-        هل لديك حساب؟ <a href="register-login.html">تسجيل الدخول</a>
-      </p>
-
-      <section class="family-qr-panel" data-family-qr-panel>
-        <div class="family-qr-frame">
-          <img
-            class="family-qr-image"
-            data-family-qr-image
-            src=""
-            width="220"
-            height="220"
-            alt="رمز QR لتحميل تطبيق ينمو"
-          >
-          <div class="family-qr-logo" aria-hidden="true">
-            <img src="assets/logos/sudanese-phoniatric-logo.jpg" alt="">
-          </div>
+  <div class="split-layout">
+    <div class="form-side family-app-shell">
+      <header class="form-header family-app-header">
+        <div class="logo">
+          <a href="index.html">
+            <img src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Ynmo Logo" class="logo-img">
+          </a>
         </div>
+      </header>
 
-        <h1 class="family-qr-title" data-family-qr-title>قم بفحص الكود بكاميرا الجوال الخاص بك لتحميل تطبيق ينمو</h1>
-        <p class="family-qr-desc" data-family-qr-desc>
-          اذا كنت ولي أمر مستفيد من ذوي الإعاقة، يمكنك الاستفادة من خدماتنا من خلال مدرسة/مركز مستفيدك، أو أطلب من المدرسة/المركز التسجيل من خلال موقعنا اذا لم يكن مشتركين
+      <main class="family-app-main">
+        <p class="login-prompt family-app-login">
+          هل لديك حساب؟ <a href="register-login.html">تسجيل الدخول</a>
         </p>
-      </section>
 
-      <div class="family-app-divider" aria-hidden="true"></div>
+        <section class="family-qr-panel" data-family-qr-panel>
+          <div class="family-qr-frame">
+            <img
+              class="family-qr-image"
+              data-family-qr-image
+              src=""
+              width="220"
+              height="220"
+              alt="رمز QR لتحميل تطبيق ينمو"
+            >
+            <div class="family-qr-logo" aria-hidden="true">
+              <img src="assets/logos/sudanese-phoniatric-logo.jpg" alt="">
+            </div>
+          </div>
 
-      <a href="index.html" class="family-app-home-btn">الرجوع للرئيسية</a>
-    </main>
+          <h1 class="family-qr-title" data-family-qr-title>قم بفحص الكود بكاميرا الجوال الخاص بك لتحميل تطبيق ينمو</h1>
+          <p class="family-qr-desc" data-family-qr-desc>
+            اذا كنت ولي أمر مستفيد من ذوي الإعاقة، يمكنك الاستفادة من خدماتنا من خلال مدرسة/مركز مستفيدك، أو أطلب من المدرسة/المركز التسجيل من خلال موقعنا اذا لم يكن مشتركين
+          </p>
+        </section>
+
+        <div class="family-app-divider" aria-hidden="true"></div>
+
+        <a href="index.html" class="family-app-home-btn">الرجوع للرئيسية</a>
+      </main>
+    </div>
+
+    <div class="info-side">
+      <div class="bg-shape"></div>
+      <div class="info-content">
+        <div class="brand-name">منصة ينمو</div>
+        <h1 class="main-heading">
+          يوفر ينمو القدرة على<br>
+          إنشاء وتخصيص<br>
+          المناهج
+        </h1>
+        <p class="sub-heading">
+          يمكنك المشاركة في مجتمع ينمو، و انشاء مناهج لمساعدة<br>المستفيدين بحسب احتياجاتهم
+        </p>
+        <div class="laptop-mockup">
+          <img src="https://via.placeholder.com/700x450/ffffff/cccccc?text=Ynmo+Dashboard" alt="Ynmo Dashboard">
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="js/register-family-app.js"></script>

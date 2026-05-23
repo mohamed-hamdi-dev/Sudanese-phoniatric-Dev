@@ -148,18 +148,18 @@
         <div class="library-hero-head">
           <button class="solid-btn green library-add-btn" type="button" data-open-view="create">
             <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.25" stroke="currentColor" stroke-width="1.5"/><path d="M10 6.2v7.6M6.2 10h7.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            إنشاء تقييم أو استشارة جديدة
+            إنشاء تقييم أو استمارة جديدة
           </button>
           <div class="library-hero-main">
             <div class="library-hero-title">
-              <h1>تقييم و استشارات المركز</h1>
+              <h1>تقاييم و استمارات المركز</h1>
               <div class="library-hero-tabs flow-tabs" role="tablist">
-                <button class="tab-pill" type="button" data-tab="archived" aria-pressed="false">التقييم و الاستشارات المؤرشفة</button>
-                <button class="tab-pill is-active" type="button" data-tab="active" aria-pressed="true">تقييم و استشارات</button>
+                <button class="tab-pill is-active" type="button" data-tab="active" aria-pressed="true">تقييم و استمارات</button>
+                <button class="tab-pill" type="button" data-tab="archived" aria-pressed="false">التقييم و الاستمارات المؤرشفة</button>
               </div>
             </div>
             <div class="library-hero-search">
-              <label class="library-search-wrap" aria-label="البحث في التقييمات والاستشارات">
+              <label class="library-search-wrap" aria-label="البحث في التقييمات والاستمارات">
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                   <circle cx="9" cy="9" r="5.75" stroke="currentColor" stroke-width="1.5"></circle>
                   <path d="m13.5 13.5 3.2 3.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
@@ -194,34 +194,40 @@
     </section>
 
     <section data-view="create" hidden>
-      <section class="flow-hero"><h1>إنشاء تقييم او استشارة جديدة</h1></section>
+      <section class="flow-hero"><h1>إنشاء تقييم أو استمارة جديدة</h1>
+      <span class="flow-hero-note">الأعضاء أدناه هم الذين يمكنهم الحصول على الحساب مع الصلاحيات المحددة</span>
+      </section>
       <form class="flow-form" data-create-form>
-        <label class="evaluations-field"><span class="evaluations-label">اسم التقييم أو الاستشارة *</span><input class="evaluations-input" name="title"></label>
+        <label class="evaluations-field create-title-field"><input class="evaluations-input" name="title" placeholder=" "><span class="evaluations-label">اسم التقييم أو الاستمارة *</span></label>
         <div class="evaluations-field"><span class="evaluations-label">التشخيص</span><div data-diagnosis-select></div></div>
         <label class="evaluations-field"><span class="evaluations-label">الوصف</span><textarea class="evaluations-textarea rich-editor-field" name="description"></textarea></label>
-        <div class="flow-actions"><button class="outline-btn" type="button" data-open-view="list">إلغاء</button><button class="solid-btn green" type="submit">حفظ</button></div>
+        <div class="flow-actions"><button class="solid-btn green" type="submit">حفظ</button><button class="outline-btn" type="button" data-open-view="list">إلغاء</button></div>
       </form>
     </section>
     <section data-view="structure" hidden>
       <section class="structure-hero-card">
         <div class="structure-hero-actions">
-          <button class="solid-btn green structure-action-btn" data-open-modal="edit-evaluation-modal">تعديل
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h4l10-10-4-4L4 16v4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m12 6 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
+       
           <button class="solid-btn purple structure-action-btn" data-open-modal="assign-beneficiaries-modal">تغيير المستفيد
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </button>
+            <button class="solid-btn green structure-action-btn" data-open-modal="edit-evaluation-modal">تعديل
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 20h4l10-10-4-4L4 16v4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="m12 6 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </button>
         </div>
         <div class="structure-hero-copy">
           <span class="structure-chip" data-eval-diagnosis>اضطراب النطق</span>
           <h1 data-eval-title>ج3</h1>
           <div class="structure-beneficiary">
             <div class="structure-beneficiary-avatar" aria-hidden="true">
+              <div class="structure-beneficiary-text">
+                <strong data-eval-beneficiary>MRS AMA SIDDIQ</strong>
+                <span>العضو</span>
+              </div>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-4.5 7v-.7A3.8 3.8 0 0 1 11.3 15h1.4a3.8 3.8 0 0 1 3.8 3.8v.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
-            <div class="structure-beneficiary-text">
-              <strong data-eval-beneficiary>MRS AMA SIDDIQ</strong>
-              <span>العضو</span>
             </div>
           </div>
         </div>
@@ -314,6 +320,24 @@
 </div>
 <div class="flow-modal modal-overlay" id="add-item-modal" hidden><div class="flow-modal-dialog modal-content-container"><button class="modal-close-btn" type="button" data-close-modal="add-item-modal">✕</button><div class="modal-header"><h2>أضف بند جديد</h2><div class="modal-subtitle"><span class="text-green">موقع البند</span><span class="text-grey">الجانب</span><span class="text-dark" data-active-side-name>غير محدد</span></div></div><form data-add-item-form><input type="text" class="modal-main-input" name="item_title"><span class="section-label">طريقة البند</span><div class="method-options-row"><label class="method-card"><span class="method-card-text">مفتوح</span><div class="radio-dot"></div><input type="radio" name="item_type" value="open" hidden></label><label class="method-card active"><span class="method-card-text">الاختيار المتعدد</span><div class="radio-dot"></div><input type="radio" name="item_type" value="multiple" checked hidden></label></div><div class="answers-section evaluations-field" data-item-options-field><span class="section-label">الإجابات</span><div data-options-root><div class="answer-row-wrapper" data-option-row><div class="answer-inputs-flex"><div class="custom-field-box flex-grow"><span class="field-label">الاسم <span class="req">*</span></span><input type="text" class="field-input" name="option_label"></div><div class="custom-field-box width-fixed"><span class="field-label">الوزن <span class="req">*</span></span><input type="number" class="field-input center-text" name="option_score" value="0"></div><button class="delete-btn-box" type="button" data-delete-option aria-label="حذف الخيار"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button></div><span class="badge-proposed-goals">الأهداف المقترحة</span></div></div><div class="add-option-container"><button class="btn-solid-green" type="button" data-add-option><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>إضافة خيار</button></div></div><span class="section-label">ملاحظات التعليمات</span><div class="rich-text-wrapper"><textarea class="evaluations-textarea rich-editor-field rich-text-body" name="item_notes" placeholder="اكتب شيئاً..."></textarea></div><div class="modal-footer-actions"><button class="btn-outline-purple" type="button" data-close-modal="add-item-modal">إلغاء</button><button class="btn-outline-green" type="button" data-add-item-submit-more>إنشاء وإضافة بند جديد</button><button class="btn-solid-green" type="button" data-add-item-submit>إنشاء</button></div></form></div></div>
 <div class="flow-modal" id="edit-evaluation-modal" hidden><div class="flow-modal-dialog"><h3>تعديل معلومات التقييم أو الاستشارة</h3><label class="evaluations-field"><span class="evaluations-label">اسم التقييم</span><input class="evaluations-input" name="edit_title"></label><div class="evaluations-field"><span class="evaluations-label">التشخيص</span><div data-edit-diagnosis-select></div></div><label class="evaluations-field"><span class="evaluations-label">الوصف</span><textarea class="evaluations-textarea rich-editor-field" name="edit_description"></textarea></label><div class="flow-actions"><button class="outline-btn" data-close-modal="edit-evaluation-modal">إلغاء</button><button class="solid-btn green" data-save-edit-eval>حفظ</button></div></div></div>
+<div class="flow-modal" id="edit-side-modal" hidden>
+  <div class="flow-modal-dialog flow-modal-dialog--side-edit">
+    <button class="modal-close-btn side-edit-close" type="button" data-close-modal="edit-side-modal">✕</button>
+    <h3>تعديل الجانب</h3>
+    <label class="evaluations-field">
+      <span class="evaluations-label">اسم التقييم أو الاستشارة <span class="req">*</span></span>
+      <input class="evaluations-input" name="edit_side_eval_title" readonly>
+    </label>
+    <label class="evaluations-field">
+      <span class="evaluations-label">إسم الجانب <span class="req">*</span></span>
+      <input class="evaluations-input" name="edit_side_title">
+    </label>
+    <div class="flow-actions side-edit-actions">
+      <button class="solid-btn green" type="button" data-save-side-edit>تعديل</button>
+      <button class="outline-btn outline-btn--purple" type="button" data-close-modal="edit-side-modal">إلغاء</button>
+    </div>
+  </div>
+</div>
 
 <script src="js/mock-data.js"></script><script src="js/storage.js"></script><script src="js/multiselect.js"></script><script src="js/modals.js"></script><script src="js/rich-editor.js"></script><script src="js/evaluations.js"></script><script src="js/common.js"></script>
 </body></html>

@@ -5022,23 +5022,26 @@ body.library-short-goal-open {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 0;
 }
 
 .library-short-goal-modal .library-mastery-percent-title {
-  width: 46px;
-  flex: 0 0 46px;
-  text-align: left;
+  width: 60px;
+  flex: 0 0 60px;
+  text-align: right;
+  margin-right: -6px;
   color: #1f2937;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .library-short-goal-modal .library-mastery-percent-box {
   width: 56px;
   min-width: 56px;
   height: 42px;
+  margin-right: -2em;
   border: 1px solid #e3e7ef;
   border-radius: 8px;
   background: #fff;
@@ -5158,13 +5161,15 @@ body.library-short-goal-open {
   direction: rtl;
   -webkit-appearance: none;
   appearance: none;
-  background: transparent;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to left, #0bb79e 0%, #0bb79e 50%, #e5e7eb 50%, #e5e7eb 100%);
 }
 
 .library-short-goal-modal .library-mastery-range::-webkit-slider-runnable-track {
   height: 6px;
   border-radius: 999px;
-  background: var(--mastery-track-bg, #e5e7eb);
+  background: transparent;
 }
 
 .library-short-goal-modal .library-mastery-range::-webkit-slider-thumb {
@@ -5182,7 +5187,7 @@ body.library-short-goal-open {
 .library-short-goal-modal .library-mastery-range::-moz-range-track {
   height: 6px;
   border-radius: 999px;
-  background: var(--mastery-track-bg, #e5e7eb);
+  background: transparent;
 }
 
 .library-short-goal-modal .library-mastery-range::-moz-range-thumb {
