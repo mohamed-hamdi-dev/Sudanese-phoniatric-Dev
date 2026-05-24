@@ -11,76 +11,49 @@
   let loginAccounts = [];
 
   function showError(message) {
-    // Inject styles if they don't exist
-    if (!document.getElementById('custom-alert-styles')) {
+    if (!document.getElementById('custom-toast-styles')) {
       const style = document.createElement('style');
-      style.id = 'custom-alert-styles';
+      style.id = 'custom-toast-styles';
       style.innerHTML = `
-        .custom-alert-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 9999; backdrop-filter: blur(3px);
-            animation: alertFadeIn 0.2s ease;
+        .custom-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px 25px;
+            border-radius: 6px;
+            border-right: 4px solid #c62828;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: toastSlideDown 0.3s ease, toastFadeOut 0.3s ease 2.7s forwards;
+            direction: rtl;
         }
-        .custom-alert-modal {
-            background: #fff; padding: 30px; border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            text-align: center; max-width: 400px; width: 90%;
-            animation: alertSlideUp 0.3s ease;
-        }
-        .custom-alert-icon { font-size: 50px; color: #e74c3c; margin-bottom: 15px; }
-        .custom-alert-title {
-            font-family: 'Cairo', sans-serif; font-size: 22px;
-            font-weight: 700; color: #333; margin-bottom: 10px;
-        }
-        .custom-alert-message {
-            font-family: 'Cairo', sans-serif; font-size: 15px;
-            color: #666; line-height: 1.6; margin-bottom: 25px;
-            direction: rtl; text-align: right;
-            background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee;
-        }
-        .custom-alert-btn {
-            background: #15b389; color: #fff; border: none;
-            padding: 12px 30px; border-radius: 8px;
-            font-family: 'Cairo', sans-serif; font-size: 16px; font-weight: 700;
-            cursor: pointer; transition: background 0.2s; width: 100%;
-        }
-        .custom-alert-btn:hover { background: #129c77; }
-        @keyframes alertFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes alertSlideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes toastSlideDown { from { top: -50px; opacity: 0; } to { top: 20px; opacity: 1; } }
+        @keyframes toastFadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
       `;
       document.head.appendChild(style);
     }
 
-    // Create modal elements
-    const overlay = document.createElement('div');
-    overlay.className = 'custom-alert-overlay';
+    const existing = document.querySelector('.custom-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.className = 'custom-toast';
+    toast.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <span>${message}</span>`;
     
-    const formattedMessage = message.replace(/\n/g, '<br>');
-    
-    overlay.innerHTML = `
-      <div class="custom-alert-modal">
-        <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-        <div class="custom-alert-title">تنبيه</div>
-        <div class="custom-alert-message">${formattedMessage}</div>
-        <button class="custom-alert-btn">حسناً، فهمت</button>
-      </div>
-    `;
+    document.body.appendChild(toast);
 
-    document.body.appendChild(overlay);
-
-    // Close modal on click
-    const btn = overlay.querySelector('.custom-alert-btn');
-    btn.addEventListener('click', () => {
-      overlay.remove();
-    });
-  }
-
-  function formatDemoHint(accounts) {
-    return accounts
-      .map((item) => `- ${item.email} / ${item.password}`)
-      .join('\n');
+    setTimeout(() => {
+      if (toast.parentNode) toast.remove();
+    }, 3000);
   }
 
   function handleLogin(event) {
@@ -104,7 +77,7 @@
     );
 
     if (!account) {
-      showError(`بيانات الدخول غير صحيحة.\n\nتجربة:\n${formatDemoHint(loginAccounts)}`);
+      showError('بيانات الدخول غير صحيحة.');
       return;
     }
 
