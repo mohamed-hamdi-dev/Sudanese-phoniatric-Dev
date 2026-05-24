@@ -43,25 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadAccountTypes() {
-        const defaultTypes = [
+        const types = [
             { id: "school", label: "مركز/ مدرسة", iconClass: "fa-regular fa-building", enabled: false, lockMessage: "متاح قريباً" },
             { id: "teacher", label: "معلم/ أخصائي", iconClass: "fa-solid fa-chalkboard-user", iconColor: "#15b389", enabled: true, registerHref: "register-teacher.html" },
             { id: "family", label: "أسرة", iconClass: "fa-solid fa-people-roof", enabled: false, lockMessage: "متاح قريباً" }
         ];
 
-        try {
-            const response = await fetch('./data/account-types.json', { cache: 'no-cache' });
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const data = await response.json();
-            if (Array.isArray(data.accountTypes) && data.accountTypes.length) {
-                renderAccountCards(data.accountTypes);
-                return;
-            }
-        } catch (error) {
-            console.warn('[main] تعذر تحميل account-types.json، سيتم استخدام البيانات الافتراضية', error);
-        }
-
-        renderAccountCards(defaultTypes);
+        renderAccountCards(types);
     }
 
     loadAccountTypes();
