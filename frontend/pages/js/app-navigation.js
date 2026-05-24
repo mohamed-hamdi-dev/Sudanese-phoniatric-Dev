@@ -169,12 +169,106 @@
   async function initNavigation() {
     if (!document.querySelector('.app-shell')) return;
 
-    const response = await fetch(NAV_JSON_URL, { cache: 'no-cache' });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+    const config = {
+  "roleLabels": {
+    "owner": "المالك",
+    "admin": "مشرف",
+    "doctor": "دكتور",
+    "member": "عضو"
+  },
+  "accountMenu": [
+    { "label": "ملف التعريف", "href": "settings.html" },
+    { "label": "تغيير كلمة المرور", "href": "settings.html" },
+    { "label": "تسجيل الخروج", "href": "register-login.html" }
+  ],
+  "mainNav": [
+    {
+      "id": "dashboard",
+      "label": "لوحة التحكم",
+      "href": "dashboard.html",
+      "icon": "dashboard",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": true
+    },
+    {
+      "id": "library",
+      "label": "المكتبة",
+      "href": "library.html",
+      "icon": "library",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": true
+    },
+    {
+      "id": "evaluations",
+      "label": "التقييم والاستمارة",
+      "href": "evaluations.html",
+      "icon": "evaluations",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": false
+    },
+    {
+      "id": "beneficiaries",
+      "label": "المستفيدين",
+      "href": "beneficiaries.html",
+      "icon": "beneficiaries",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": true
+    },
+    {
+      "id": "members",
+      "label": "الأعضاء",
+      "href": "members.html",
+      "icon": "members",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": true
+    },
+    {
+      "id": "families",
+      "label": "الأسر",
+      "href": "families.html",
+      "icon": "families",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": false
+    },
+    {
+      "id": "requests",
+      "label": "الطلبات",
+      "href": "requests.html",
+      "icon": "requests",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": false
+    },
+    {
+      "id": "attendance",
+      "label": "الحضور و الغياب",
+      "href": "attendance.html",
+      "icon": "attendance",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": false
+    },
+    {
+      "id": "settings",
+      "label": "الإعدادات",
+      "href": "settings.html",
+      "icon": "settings",
+      "showInSidebar": true,
+      "showInMobileOverlay": true,
+      "showInBottomBar": true
     }
-
-    const config = await response.json();
+  ],
+  "mobileBottomBar": {
+    "enabled": false,
+    "maxItems": 5
+  }
+};
     applyNavigation(config);
   }
 

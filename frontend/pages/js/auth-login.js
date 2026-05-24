@@ -56,11 +56,37 @@
   }
 
   async function loadLoginAccounts() {
-    const response = await fetch(LOGIN_JSON_URL, { cache: 'no-cache' });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+    const data = {
+  "accounts": [
+    {
+      "email": "owner@phoniatric.com",
+      "password": "owner123",
+      "user": {
+        "id": "owner-1",
+        "role": "owner",
+        "name": "sudanesephoniatric"
+      }
+    },
+    {
+      "email": "admin@phoniatric.com",
+      "password": "admin123",
+      "user": {
+        "id": "admin-1",
+        "role": "admin",
+        "name": "مسؤول المركز"
+      }
+    },
+    {
+      "email": "doctor@phoniatric.com",
+      "password": "doctor123",
+      "user": {
+        "id": "doctor-1",
+        "role": "doctor",
+        "name": "د. أحمد صالح"
+      }
     }
-    const data = await response.json();
+  ]
+};
     loginAccounts = Array.isArray(data.accounts) ? data.accounts : [];
   }
 
