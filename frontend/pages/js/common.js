@@ -12,7 +12,7 @@
     attendance: { clean: '/attendance', page: 'attendance.html' },
     settings: { clean: '/settings', page: 'settings.html' },
     login: { clean: '/login', page: 'register-login.html' },
-    register: { clean: '/register', page: 'index.html' }
+    register: { clean: '/register', page: 'choose-account.html' }
   };
 
   const routeKeys = new Set(Object.keys(routeTable));
