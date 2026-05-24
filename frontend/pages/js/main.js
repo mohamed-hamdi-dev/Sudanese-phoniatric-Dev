@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fallbackCards = document.querySelectorAll('.account-card');
         bindAccountCards(fallbackCards);
         fallbackCards.forEach((card) => {
-            if (card.getAttribute('data-type') === 'school') {
+            if (card.getAttribute('data-type') === 'school' || card.getAttribute('data-type') === 'family') {
                 card.classList.add('is-locked');
                 card.setAttribute('data-lock-message', 'متاح قريباً');
             }
@@ -84,12 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (selectedAccount === 'school') {
-            window.location.href = 'register-school.html';
-        } else if (selectedAccount === 'teacher') {
+        if (selectedAccount === 'teacher') {
             window.location.href = 'register-teacher.html';
-        } else if (selectedAccount === 'family') {
-            window.location.href = 'register-family-app.html';
         }
     });
 

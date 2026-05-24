@@ -1,4 +1,4 @@
-﻿(function(){
+(function(){
   let currentView = 'list';
   let activeTab = 'active';
   let activeStructureTab = 'answers';
@@ -29,6 +29,7 @@
   const editSideTitleInput = document.querySelector('[name="edit_side_title"]');
   const suggestedGoalsState = {
     activeRow: null,
+    openCurriculumId: null,
     openAspectId: null,
     openLongGoalId: null
   };
@@ -327,6 +328,25 @@
       countNode.textContent = count ? String(count) : '';
       countNode.hidden = !count;
     }
+    
+    let chipsWrapper = row.querySelector('.goals-chips-wrapper');
+    if (!chipsWrapper) {
+      chipsWrapper = document.createElement('div');
+      chipsWrapper.className = 'goals-chips-wrapper';
+      chipsWrapper.style.cssText = 'display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; width: 100%; direction: rtl;';
+      row.appendChild(chipsWrapper);
+    }
+    
+    if (goals && goals.length > 0) {
+      chipsWrapper.innerHTML = goals.map(g => `
+        <div style="display: inline-flex; align-items: center; background: #e8faee; color: #1bb37e; padding: 6px 12px; border-radius: 100px; font-size: 0.85rem; font-weight: 600; gap: 8px; max-width: 100%;">
+          <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">${escapeHtml(g.title)}</span>
+          <button type="button" data-remove-goal-id="${escapeHtml(g.id)}" style="background: transparent; border: 0; color: #1bb37e; cursor: pointer; padding: 0; font-size: 1.1rem; line-height: 1; display: flex; align-items: center; justify-content: center; width: 18px; height: 18px;">✕</button>
+        </div>
+      `).join('');
+    } else {
+      chipsWrapper.innerHTML = '';
+    }
   }
 
   function closeSuggestedGoalsPanels(){
@@ -341,10 +361,9 @@
     const tree = getSuggestedGoalsTree();
     const selected = readOptionGoals(row);
     const selectedIds = new Set(selected.map((goal)=>goal.id));
-    const firstAspect = tree[0]?.aspects?.[0];
-    const firstLongGoal = firstAspect?.longGoals?.[0];
-    if (suggestedGoalsState.openAspectId === null) suggestedGoalsState.openAspectId = firstAspect?.id || NO_OPEN_GOAL_NODE;
-    if (suggestedGoalsState.openLongGoalId === null) suggestedGoalsState.openLongGoalId = firstLongGoal?.id || NO_OPEN_GOAL_NODE;
+    if (suggestedGoalsState.openCurriculumId === null) suggestedGoalsState.openCurriculumId = NO_OPEN_GOAL_NODE;
+    if (suggestedGoalsState.openAspectId === null) suggestedGoalsState.openAspectId = NO_OPEN_GOAL_NODE;
+    if (suggestedGoalsState.openLongGoalId === null) suggestedGoalsState.openLongGoalId = NO_OPEN_GOAL_NODE;
 
     const panel = document.createElement('div');
     panel.className = 'suggested-goals-modal';
@@ -355,18 +374,72 @@
         <aside class="suggested-goals-selected">
           <div class="suggested-goals-side-title">الأهداف المحددة</div>
           ${selected.length ? `<div class="suggested-goals-selected-list">
-            ${selected.map((goal)=>`<div class="suggested-goals-selected-row">
-              <button class="suggested-goals-selected-kebab" type="button" aria-label="خيارات الهدف">
-                <span></span><span></span><span></span>
-              </button>
-              <div class="suggested-goals-selected-text">${escapeHtml(goal.title)}</div>
-              <button class="suggested-goals-selected-chevron" type="button" aria-label="فتح الهدف">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
+            ${selected.map((goal)=>`<div class="suggested-goals-selected-item-wrapper" style="border-radius: 8px; background: #fff; margin-bottom: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); overflow: visible;">
+              <div class="suggested-goals-selected-row" style="display: flex; align-items: center; padding: 12px 16px; cursor: pointer; gap: 12px;" onclick="const d = this.nextElementSibling; const isHidden = d.hidden; d.hidden = !isHidden; this.querySelector('.sg-chevron').style.transform = isHidden ? 'rotate(180deg)' : '';">
+                <button class="sg-chevron" type="button" aria-label="فتح الهدف" style="background: transparent; border: 0; color: #1f2230; padding: 0; cursor: pointer; transition: transform 0.2s; display: flex; align-items: center; justify-content: center;">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div class="suggested-goals-selected-text" style="flex: 1; text-align: right; font-weight: 600; font-size: 0.95rem; color: #1f2230;">${escapeHtml(goal.title)}</div>
+                <button class="suggested-goals-selected-kebab" type="button" aria-label="خيارات الهدف" onclick="event.stopPropagation();">
+                  <span></span><span></span><span></span>
+                </button>
+              </div>
+              <div class="suggested-goals-selected-details" hidden style="padding: 24px 20px; border-top: 1px solid #e5e7eb; background: #fff;">
+                <div style="font-size: 0.95rem; color: #4b5563; margin-bottom: 24px; text-align: right;">
+                  <span style="color: #6b7280;">طريقة جمع البيانات : </span>
+                  <strong style="color: #1f2230; font-weight: 700; border-bottom: 2px solid #1bb37e; padding-bottom: 6px;">المساعدات</strong>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; direction: rtl;">
+                  <div style="text-align: right;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">خيار 1</div>
+                    <div style="font-weight: 700; font-size: 1rem; color: #1f2230;">بمفردة</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">خيار 2</div>
+                    <div style="font-weight: 700; font-size: 1rem; color: #1f2230;">خاطئة</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">خيار 3</div>
+                    <div style="font-weight: 700; font-size: 1rem; color: #1f2230;">مساعدة إيمائية</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">خيار 4</div>
+                    <div style="font-weight: 700; font-size: 1rem; color: #1f2230;">مساعدة لفظية</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">خيار 5</div>
+                    <div style="font-weight: 700; font-size: 1rem; color: #1f2230;">نموذج</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">خيار 6</div>
+                    <div style="font-weight: 700; font-size: 1rem; color: #1f2230;">مساعدة جسدية جزئية</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">خيار 7</div>
+                    <div style="font-weight: 700; font-size: 1rem; color: #1f2230;">مساعدة جسدية كاملة</div>
+                  </div>
+                </div>
+
+                <div style="margin-bottom: 24px; text-align: right;">
+                  <span style="color: #4b5563; font-size: 0.95rem; border-bottom: 2px solid #1bb37e; padding-bottom: 6px;">إعدادات متقدمة</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                  <div style="text-align: right; flex: 1;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">خيار الإتقان</div>
+                    <div style="font-weight: 700; font-size: 1.15rem; color: #1f2230;">إتقان يدوي</div>
+                  </div>
+                  <div style="text-align: left;">
+                    <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">عدد المحاولات في الجلسة</div>
+                    <div style="font-weight: 700; font-size: 1.15rem; color: #1f2230;">1</div>
+                  </div>
+                </div>
+              </div>
             </div>`).join('')}
-            <div class="suggested-goals-selected-actions">
-              <button class="suggested-goals-add-btn" type="button" data-close-goals-modal>إضافة</button>
-              <button class="suggested-goals-cancel-btn" type="button" data-close-goals-modal>إلغاء</button>
+            <div class="suggested-goals-selected-actions" style="display: flex; gap: 12px; margin-top: auto; padding-top: 16px;">
+              <button class="suggested-goals-add-btn" type="button" data-close-goals-modal style="flex: 1; height: 44px; display: flex; align-items: center; justify-content: center; background: #1bb37e; color: #fff; border: 0; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer;">إضافة</button>
+              <button class="suggested-goals-cancel-btn" type="button" data-close-goals-modal style="flex: 1; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; color: #6b4c9a; border: 1px solid #6b4c9a; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer;">إلغاء</button>
             </div>
           </div>` : `<div class="suggested-goals-selected-card">
             <span>${selected.length ? `${selected.length} أهداف محددة` : 'لا يوجد أهداف محددة'}</span>
@@ -377,64 +450,155 @@
           <h2>اقتراح من المكتبة</h2>
           <label class="suggested-goals-search">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            <input type="search" placeholder="ابحث الأهداف بالعنوان">
+            <input type="search" placeholder="ابحث الأهداف بالعنوان" data-suggested-goals-search>
           </label>
-          <div class="suggested-goals-tree">
-            ${tree.map((curriculum)=>`
-              <div class="suggested-goals-curriculum">
-                <div class="suggested-goals-curriculum-head">
-                  <span>${escapeHtml(curriculum.title)}</span>
-                  <span>${(curriculum.aspects || []).length} الجوانب</span>
-                </div>
-                <div class="suggested-goals-tab-title">الجوانب</div>
-                ${(curriculum.aspects || []).map((aspect)=>{
-                  const isAspectOpen = suggestedGoalsState.openAspectId === aspect.id;
-                  const longGoalsCount = (aspect.longGoals || []).length;
-                  const shortGoalsCount = (aspect.longGoals || []).reduce((total, goal)=>total + (goal.shortGoals || []).length, 0);
-                  return `<div class="suggested-goals-aspect ${isAspectOpen ? 'is-open' : ''}">
-                    <div class="suggested-goals-row suggested-goals-row--aspect">
-                      <button class="suggested-goals-toggle ${isAspectOpen ? 'is-open' : ''}" type="button" data-goals-toggle-aspect="${escapeHtml(aspect.id)}" aria-label="فتح أو غلق الجانب">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </button>
-                      <span class="suggested-goals-row-title">${escapeHtml(aspect.title)}</span>
-                      <span class="suggested-goals-icon" aria-hidden="true">▣</span>
-                      <span class="suggested-goals-count">${shortGoalsCount} الأهداف الطويلة</span>
+          <div class="suggested-goals-tree" style="padding-inline-start: 0 !important; margin-top: 20px;">
+            <div class="library-tree">
+              ${tree.map((curriculum)=>{
+                const isCurriculumOpen = suggestedGoalsState.openCurriculumId === curriculum.id;
+                const curriculumLongGoalsCount = (curriculum.aspects || []).reduce((total, aspect)=>total + (aspect.longGoals || []).length, 0);
+                return `<article class="library-tree-item library-tree-item--curriculum suggested-goals-curriculum ${isCurriculumOpen ? 'is-open' : ''}">
+                  <div class="suggested-goals-curriculum-head library-tree-row library-tree-row--curriculum">
+                    <button class="library-tree-toggle ${isCurriculumOpen ? 'is-open' : ''}" type="button" data-goals-toggle-curriculum="${escapeHtml(curriculum.id)}" aria-label="فتح أو غلق المنهج">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="library-tree-content">
+                      <div class="library-tree-title">${escapeHtml(curriculum.title)}</div>
                     </div>
-                    ${isAspectOpen ? `<div class="suggested-goals-children">
-                      <div class="suggested-goals-section-title">${longGoalsCount} الأهداف الطويلة</div>
+                    <div class="library-tree-count">${(curriculum.aspects || []).length} الجوانب • ${curriculumLongGoalsCount} الأهداف الطويلة</div>
+                  </div>
+                  ${isCurriculumOpen ? `<div class="library-tree-panel suggested-goals-curriculum-panel">
+                    <div class="suggested-goals-tab-title" style="margin-bottom: 16px;">الجوانب</div>
+              ${(curriculum.aspects || []).map((aspect)=>{
+                const isAspectOpen = suggestedGoalsState.openAspectId === aspect.id;
+                const longGoalsCount = (aspect.longGoals || []).length;
+                const shortGoalsCount = (aspect.longGoals || []).reduce((total, goal)=>total + (goal.shortGoals || []).length, 0);
+                return `<article class="library-tree-item library-tree-item--aspect ${isAspectOpen ? 'is-open' : ''}">
+                  <div class="library-tree-row library-tree-row--aspect">
+                    <button class="library-tree-toggle ${isAspectOpen ? 'is-open' : ''}" type="button" data-goals-toggle-aspect="${escapeHtml(aspect.id)}" aria-label="فتح أو غلق الجانب">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="library-tree-content">
+                      <div class="library-tree-title">${escapeHtml(aspect.title)}</div>
+                    </div>
+                    <span class="suggested-goals-row-icon" aria-hidden="true"></span>
+                    <span class="suggested-goals-row-connector" aria-hidden="true"></span>
+                    <div class="library-tree-count" style="background:#e8faee; color:#1b3d2b; padding:4px 12px; border-radius:6px; font-size:0.85rem; font-weight:500;">${shortGoalsCount} الأهداف الطويلة</div>
+                  </div>
+                  ${isAspectOpen ? `<div class="library-tree-panel">
+                    <div class="library-tree-children library-tree-children--long-goal">
+                      <div class="suggested-goals-section-title" style="margin: 16px 0 12px 0; color: #4b5563; font-weight: 600;">${longGoalsCount} الأهداف الطويلة</div>
                       ${(aspect.longGoals || []).map((longGoal)=>{
                         const isLongOpen = suggestedGoalsState.openLongGoalId === longGoal.id;
-                        return `<div class="suggested-goals-long ${isLongOpen ? 'is-open' : ''}">
-                          <div class="suggested-goals-row suggested-goals-row--long">
-                            <button class="suggested-goals-toggle ${isLongOpen ? 'is-open' : ''}" type="button" data-goals-toggle-long="${escapeHtml(longGoal.id)}" aria-label="فتح أو غلق الهدف الطويل">
-                              <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        return `<article class="library-tree-item library-tree-item--long-goal ${isLongOpen ? 'is-open' : ''}">
+                          <div class="library-tree-row library-tree-row--long-goal">
+                            <button class="library-tree-toggle ${isLongOpen ? 'is-open' : ''}" type="button" data-goals-toggle-long="${escapeHtml(longGoal.id)}" aria-label="فتح أو غلق الهدف الطويل">
+                              <svg viewBox="0 0 24 24" width="20" height="20" fill="none"><path d="M19 9l-7 7-7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </button>
-                            <span class="suggested-goals-row-title">${escapeHtml(longGoal.title)}</span>
-                            <span class="suggested-goals-icon" aria-hidden="true">▣</span>
-                            <span class="suggested-goals-count">${(longGoal.shortGoals || []).length} الأهداف القصيرة</span>
+                            <div class="library-tree-content">
+                              <div class="library-tree-title">${escapeHtml(longGoal.title)}</div>
+                            </div>
+                            <span class="suggested-goals-row-icon" aria-hidden="true"></span>
+                            <span class="suggested-goals-row-connector" aria-hidden="true"></span>
+                            <div class="library-tree-count" style="background:#e8faee; color:#1b3d2b; padding:4px 12px; border-radius:6px; font-size:0.85rem; font-weight:500;">${(longGoal.shortGoals || []).length} الأهداف القصيرة</div>
                           </div>
-                          ${isLongOpen ? `<div class="suggested-goals-short-list">
-                            <div class="suggested-goals-section-title">الأهداف القصيرة</div>
-                            ${(longGoal.shortGoals || []).map((goal)=>`
-                              <label class="suggested-goals-short">
-                                <input type="checkbox" data-suggested-goal="${escapeHtml(goal.id)}" ${selectedIds.has(goal.id) ? 'checked' : ''}>
-                                <span>${escapeHtml(goal.title)}</span>
-                                <small>${escapeHtml(goal.collectionType)}</small>
-                              </label>
-                            `).join('')}
+                          ${isLongOpen ? `<div class="library-tree-panel">
+                            <div class="library-tree-children library-tree-children--short-goal">
+                              <div class="suggested-goals-section-title" style="margin: 16px 0 12px 0; color: #4b5563; font-weight: 600;">الأهداف القصيرة</div>
+                              ${(longGoal.shortGoals || []).map((goal)=>`
+                                <article class="library-tree-item library-tree-item--short-goal">
+                                  <div class="library-tree-row library-tree-row--short-goal">
+                                    <span class="library-tree-leaf-dot" aria-hidden="true"></span>
+                                    <div class="library-tree-content">
+                                      <label class="suggested-goals-short" style="display:flex; align-items:center; width:100%; gap:16px; cursor:pointer; margin:0; padding: 0;">
+                                        <input type="checkbox" style="width:22px; height:22px; cursor:pointer;" data-suggested-goal="${escapeHtml(goal.id)}" ${selectedIds.has(goal.id) ? 'checked' : ''}>
+                                        <div class="library-tree-title" style="flex:1;">${escapeHtml(goal.title)}</div>
+                                        <small style="color:#6b4c9a; background:#f4effa; padding:4px 10px; border-radius:4px; font-size:0.8rem; font-weight:500;">${escapeHtml(goal.collectionType)}</small>
+                                      </label>
+                                    </div>
+                                  </div>
+                                </article>
+                              `).join('')}
+                            </div>
                           </div>` : ''}
-                        </div>`;
+                        </article>`;
                       }).join('')}
-                    </div>` : ''}
-                  </div>`;
-                }).join('')}
-              </div>
-            `).join('')}
+                    </div>
+                  </div>` : ''}
+                </article>`;
+              }).join('')}
+                  </div>` : ''}
+                </article>`;
+              }).join('')}
+            </div>
           </div>
         </section>
       </div>
     </div>`;
     document.body.appendChild(panel);
+    setTimeout(drawGoalsTreeLines, 10);
+  }
+
+  function drawGoalsTreeLines() {
+    const treeRoot = document.querySelector(".suggested-goals-modal .library-tree");
+    if (!treeRoot) return;
+    
+    const oldSvg = treeRoot.querySelector(".library-tree-svg-lines");
+    if (oldSvg) oldSvg.remove();
+
+    if (!window.SVG) return;
+
+    treeRoot.classList.add("is-leader-lines");
+    const rootRect = treeRoot.getBoundingClientRect();
+    const rootWidth = treeRoot.scrollWidth;
+    const rootHeight = treeRoot.scrollHeight;
+
+    const draw = window.SVG().addTo(treeRoot).size(rootWidth, rootHeight).addClass("library-tree-svg-lines");
+    
+    const openItems = treeRoot.querySelectorAll(".library-tree-item.is-open");
+    openItems.forEach((item) => {
+      const parentRow = item.querySelector(":scope > .library-tree-row");
+      const childRows = Array.from(item.querySelectorAll(":scope > .library-tree-panel > .library-tree-children > .library-tree-item > .library-tree-row"));
+      if (!parentRow || !childRows.length) return;
+
+      const getTreePoint = (row) => {
+        const rect = row.getBoundingClientRect();
+        return {
+          right: rect.right - rootRect.left + treeRoot.scrollLeft,
+          centerY: rect.top - rootRect.top + rect.height / 2 + treeRoot.scrollTop
+        };
+      };
+
+      const parent = getTreePoint(parentRow);
+      const points = childRows.map((childRow) => ({
+        parent,
+        child: {
+          ...getTreePoint(childRow),
+          isOpen: childRow.closest(".library-tree-item")?.classList.contains("is-open")
+        }
+      }));
+
+      const isSmallLevel = !item.classList.contains("library-tree-item--curriculum");
+      const children = points.map((point) => point.child);
+      const mobileTimelineGap = window.matchMedia("(max-width: 768px)").matches ? 30 : 18;
+      const lineX = Math.max(...children.map((child) => child.right)) + mobileTimelineGap;
+      const dash = { color: "#c4cad6", width: 2, dasharray: "5 4", linecap: "round", linejoin: "round" };
+
+      draw.path(`M ${parent.right} ${parent.centerY} H ${lineX} V ${children[children.length - 1].centerY}`).fill("none").stroke(dash);
+
+      if (isSmallLevel) {
+        draw.circle(18).center(lineX, parent.centerY).fill("none").stroke({ color: "rgba(30, 158, 88, 0.22)", width: 4 });
+        draw.circle(8).center(lineX, parent.centerY).fill("#1e9e58").stroke({ color: "#1e9e58", width: 2 });
+      }
+
+      children.forEach((child) => {
+        draw.path(`M ${lineX} ${child.centerY} H ${child.right}`).fill("none").stroke(dash);
+        if (child.isOpen && window.matchMedia("(max-width: 768px)").matches) return;
+        draw.circle(8).center(lineX, child.centerY)
+          .fill(isSmallLevel ? "#1e9e58" : "#fff")
+          .stroke({ color: isSmallLevel ? "#1e9e58" : "#c4cad6", width: 2 });
+      });
+    });
   }
 
   function toggleSuggestedGoal(row, goalId, checked){
@@ -450,24 +614,24 @@
   }
 
   function buildOptionRow(){
-    return `<div class="answer-row-wrapper" data-option-row>
+    return `<div class="answer-row-wrapper" data-option-row style="display: flex; flex-direction: column;">
       <div class="answer-inputs-flex">
         <div class="custom-field-box flex-grow">
-          <span class="field-label">الاسم <span class="req">*</span></span>
+          <span class="field-label" style="color: #4d5f8f; font-size: 0.9rem;">الاسم <span class="req">*</span></span>
           <input type="text" class="field-input" name="option_label">
         </div>
         <div class="custom-field-box width-fixed">
-          <span class="field-label">الوزن <span class="req">*</span></span>
+          <span class="field-label" style="color: #1bb37e; font-size: 0.9rem;">الوزن <span class="req">*</span></span>
           <input type="number" class="field-input center-text" name="option_score" value="0">
         </div>
         <button class="delete-btn-box" type="button" data-delete-option aria-label="حذف الخيار">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b4c9a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="3 6 5 6 21 6"></polyline>
             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
           </svg>
         </button>
       </div>
-      <button class="badge-proposed-goals" type="button" data-open-goals-picker>
+      <button class="btn-proposed-goals" type="button" data-open-goals-picker>
         الأهداف المقترحة
         <span data-goals-count hidden></span>
       </button>
@@ -912,6 +1076,17 @@
       return;
     }
 
+    const curriculumGoalsToggle = e.target.closest('[data-goals-toggle-curriculum]');
+    if (curriculumGoalsToggle) {
+      suggestedGoalsState.openCurriculumId = suggestedGoalsState.openCurriculumId === curriculumGoalsToggle.dataset.goalsToggleCurriculum
+        ? NO_OPEN_GOAL_NODE
+        : curriculumGoalsToggle.dataset.goalsToggleCurriculum;
+      suggestedGoalsState.openAspectId = NO_OPEN_GOAL_NODE;
+      suggestedGoalsState.openLongGoalId = NO_OPEN_GOAL_NODE;
+      renderSuggestedGoalsPanel(suggestedGoalsState.activeRow);
+      return;
+    }
+
     const aspectGoalsToggle = e.target.closest('[data-goals-toggle-aspect]');
     if (aspectGoalsToggle) {
       suggestedGoalsState.openAspectId = suggestedGoalsState.openAspectId === aspectGoalsToggle.dataset.goalsToggleAspect
@@ -1189,10 +1364,62 @@
 
     const deleteOption = e.target.closest('[data-delete-option]');
     if (deleteOption) {
+      deleteOption.closest('.answer-row-wrapper')?.remove();
+      return;
+    }
+
+    const removeGoalBtn = e.target.closest('[data-remove-goal-id]');
+    if (removeGoalBtn) {
+      const row = removeGoalBtn.closest('[data-option-row]');
+      const goalId = removeGoalBtn.dataset.removeGoalId;
+      if (row && goalId) {
+        toggleSuggestedGoal(row, goalId, false);
+      }
+      return;
+    }
+    if (deleteOption) {
       const rows = addItemForm.querySelectorAll('[data-option-row]');
       if (rows.length > 1) {
         deleteOption.closest('[data-option-row]')?.remove();
       }
+    }
+
+  });
+
+  document.addEventListener('input', (e) => {
+    const searchInput = e.target.closest('[data-suggested-goals-search]');
+    if (searchInput) {
+      const q = searchInput.value.toLowerCase().trim();
+      const tree = document.querySelector('.suggested-goals-modal .library-tree');
+      if (!tree) return;
+      
+      const shortGoals = tree.querySelectorAll('.library-tree-item--short-goal');
+      shortGoals.forEach(sg => {
+        const lg = sg.closest('.library-tree-item--long-goal');
+        const asp = lg?.closest('.library-tree-item--aspect');
+        const sgTitle = sg.querySelector('.library-tree-title')?.textContent?.toLowerCase() || '';
+        const lgTitle = lg?.querySelector('.library-tree-title')?.textContent?.toLowerCase() || '';
+        const aspTitle = asp?.querySelector('.library-tree-title')?.textContent?.toLowerCase() || '';
+        if (!q || sgTitle.includes(q) || lgTitle.includes(q) || aspTitle.includes(q)) {
+          sg.style.display = '';
+        } else {
+          sg.style.display = 'none';
+        }
+      });
+      
+      const longGoals = tree.querySelectorAll('.library-tree-item--long-goal');
+      longGoals.forEach(lg => {
+        const hasVisibleChild = Array.from(lg.querySelectorAll('.library-tree-item--short-goal')).some(child => child.style.display !== 'none');
+        lg.style.display = (!q || hasVisibleChild) ? '' : 'none';
+      });
+
+      const aspects = tree.querySelectorAll('.library-tree-item--aspect');
+      aspects.forEach(asp => {
+        const hasVisibleChild = Array.from(asp.querySelectorAll('.library-tree-item--long-goal')).some(child => child.style.display !== 'none');
+        asp.style.display = (!q || hasVisibleChild) ? '' : 'none';
+      });
+      
+      drawGoalsTreeLines();
     }
   });
 

@@ -75,7 +75,6 @@
   ])
     .then(bindLoginForm)
     .catch((error) => {
-      console.error('[auth-login] تعذر تحميل login-accounts.json', error);
-      showError('تعذر تحميل حسابات الدخول. تأكد من تشغيل الموقع عبر خادم محلي (وليس فتح الملف مباشرة).');
+      console.error('[auth-login] failed to load login-accounts.json', error);
     });
 })();

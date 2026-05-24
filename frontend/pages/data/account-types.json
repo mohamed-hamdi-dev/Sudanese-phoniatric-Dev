@@ -5,7 +5,6 @@
       "label": "مركز/ مدرسة",
       "iconClass": "fa-regular fa-building",
       "enabled": false,
-      "registerHref": "register-school.html",
       "lockMessage": "متاح قريباً"
     },
     {
@@ -20,9 +19,8 @@
       "id": "family",
       "label": "أسرة",
       "iconClass": "fa-solid fa-people-roof",
-      "iconColor": "#15b389",
-      "enabled": true,
-      "registerHref": "register-family-app.html"
+      "enabled": false,
+      "lockMessage": "متاح قريباً"
     }
   ]
 }

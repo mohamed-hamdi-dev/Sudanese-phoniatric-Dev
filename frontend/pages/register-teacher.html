@@ -14,19 +14,16 @@
     <link rel="stylesheet" href="styles/info-panel.css">
     <link rel="stylesheet" href="styles/form-panel.css">
     <link rel="stylesheet" href="styles/register.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
 </head>
 
 <body>
-
     <div class="split-layout">
-
         <div class="form-side">
             <header class="form-header">
                 <div class="logo">
                     <a href="index.html">
-                        <img src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Ynmo Logo"
-                            class="logo-img">
+                        <img src="assets/logos/sudanese-phoniatric-logo.jpg" alt="Ynmo Logo" class="logo-img">
                     </a>
                 </div>
                 <div class="lang-switcher">
@@ -35,43 +32,46 @@
             </header>
 
             <div class="form-content-wrapper">
-
-                <div class="step active">
+                <div class="step active register-screen">
                     <h2 class="step-title" style="margin-bottom: 20px; color: var(--ynmo-dark-green);">
-                        إنشاء حساب مركز/مدرسة جديد
+                        إنشاء حساب معالج/أخصائي جديد
                     </h2>
 
-                    <form class="register-form">
+                    <p class="login-prompt specialist-login-prompt">هل لديك حساب؟ <a href="register-login.html">تسجيل الدخول</a></p>
+                    <h2 class="specialist-register-title">إنشاء حساب جديد</h2>
+
+                    <form class="register-form register-form--reference">
                         <div class="form-row">
                             <div class="input-box">
                                 <label>الاسم الأول <span class="asterisk">*</span></label>
-                                <input type="text" placeholder="أدخل الاسم الأول">
+                                <input type="text" placeholder="">
                             </div>
                             <div class="input-box">
                                 <label style="color: #888;">الاسم الأخير</label>
-                                <input type="text" placeholder="أدخل الاسم الأخير">
+                                <input type="text" placeholder="">
                             </div>
                         </div>
 
                         <div class="input-box">
                             <label>اسم مقدم الخدمة <span class="asterisk">*</span></label>
-                            <input type="text" placeholder="أدخل اسم الجهة أو مقدم الخدمة">
+                            <input type="text" placeholder="">
                         </div>
 
-                <div class="input-box phone-input-container" dir="ltr">
-                    <label dir="rtl"
-                        style="text-align: right; width: 100%; margin-bottom: 5px; color: #888; font-size: 11px; font-weight: 700;">رقم
-                        الهاتف <span class="asterisk">*</span></label>
-                    <input type="tel" id="phone" class="international-phone">
-                </div>
+                        <div class="input-box phone-input-container" dir="ltr">
+                            <label dir="rtl"
+                                style="text-align: right; width: 100%; margin-bottom: 5px; color: #888; font-size: 11px; font-weight: 700;">رقم
+                                الهاتف <span class="asterisk">*</span></label>
+                            <input type="tel" id="phone" class="international-phone">
+                        </div>
+
                         <div class="input-box">
                             <label style="color: #888;">البريد الإلكتروني <span class="asterisk">*</span></label>
-                            <input type="email" placeholder="example@email.com">
+                            <input type="email" placeholder="">
                         </div>
 
                         <div class="input-box password-box">
                             <label style="color: #888;">كلمة المرور <span class="asterisk">*</span></label>
-                            <input type="password" placeholder="أدخل كلمة المرور">
+                            <input type="password" placeholder="">
                             <i class="fa-regular fa-eye eye-icon"></i>
                         </div>
 
@@ -83,12 +83,12 @@
                             <li><i class="fa-regular fa-circle-question"></i> يحتوي على عدد 8 أحرف على الأقل</li>
                         </ul>
 
-    <div class="form-buttons-container">
-        <button type="submit" class="btn-create">إنشاء حساب</button>
-        <a href="index.html" class="btn-return">
-            الرجوع <i class="fa-solid fa-arrow-right"></i>
-        </a>
-    </div>
+                        <div class="form-buttons-container">
+                            <button type="submit" class="btn-create">التسجيل</button>
+                            <a href="index.html" class="btn-return">
+                                العودة <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -104,7 +104,8 @@
                     المناهج
                 </h1>
                 <p class="sub-heading">
-                    يمكنك المشاركة في مجتمع ينمو، و انشاء مناهج لمساعدة<br>المستفيدين بحسب احتياجاتهم
+                    يمكنك المشاركة في مجتمع ينمو، و إنشاء مناهج لمساعدة<br>
+                    المستفيدين بحسب احتياجاتهم
                 </p>
                 <div class="laptop-mockup">
                     <img src="https://via.placeholder.com/700x450/ffffff/cccccc?text=Ynmo+Dashboard"
@@ -112,28 +113,20 @@
                 </div>
             </div>
         </div>
-
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script>
-        // تفعيل القائمة المنسدلة للدول
         const phoneInputField = document.querySelector("#phone");
         if (phoneInputField) {
             window.intlTelInput(phoneInputField, {
-                initialCountry: "eg", // مصر كدولة افتراضية
-                preferredCountries: ["eg", "sa", "ae", "kw", "qa", "jo", "om"], // الدول العربية تظهر في الأول
+                initialCountry: "eg",
+                preferredCountries: ["eg", "sa", "ae", "kw", "qa", "jo", "om"],
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
             });
         }
     </script>
     <script src="js/main.js"></script>
-    </body>
-    
-    </html>
 </body>
 
 </html>
-
-
-
-

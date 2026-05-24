@@ -2418,3 +2418,46 @@
   }
 }
 
+@media (max-width: 1100px) {
+  .library-tree-row--curriculum,
+  .library-tree-row--aspect,
+  .library-tree-row--long-goal,
+  .library-tree-row--short-goal,
+  .library-tree-row.library-tree-row--short-goal-rich {
+    position: relative;
+    overflow: visible;
+    padding-left: max(56px, env(safe-area-inset-left));
+  }
+
+  .library-tree-row--curriculum .library-curriculum-actions,
+  .library-tree-row--aspect .library-curriculum-actions,
+  .library-tree-row--long-goal .library-curriculum-actions,
+  .library-tree-row--short-goal .library-curriculum-actions,
+  .library-tree-row.library-tree-row--short-goal-rich .library-curriculum-actions {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    width: 34px;
+    height: 34px;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    transform: translateY(-50%);
+    z-index: 45;
+  }
+
+  .library-tree-row--curriculum .library-curriculum-kebab,
+  .library-tree-row--aspect .library-curriculum-kebab,
+  .library-tree-row--long-goal .library-curriculum-kebab,
+  .library-tree-row--short-goal .library-curriculum-kebab,
+  .library-tree-row.library-tree-row--short-goal-rich .library-curriculum-kebab {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+  }
+
+  .library-tree-row.library-tree-row--short-goal-rich .library-short-goal-badges {
+    padding-left: 42px;
+  }
+}
+
