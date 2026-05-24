@@ -43,8 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadAccountTypes() {
+        const defaultTypes = [
+            { id: "school", label: "مركز/ مدرسة", iconClass: "fa-regular fa-building", enabled: false, lockMessage: "متاح قريباً" },
+            { id: "teacher", label: "معلم/ أخصائي", iconClass: "fa-solid fa-chalkboard-user", iconColor: "#15b389", enabled: true, registerHref: "register-teacher.html" },
+            { id: "family", label: "أسرة", iconClass: "fa-solid fa-people-roof", enabled: false, lockMessage: "متاح قريباً" }
+        ];
+
         try {
-            const response = await fetch('data/account-types.json', { cache: 'no-cache' });
+            const response = await fetch('./data/account-types.json', { cache: 'no-cache' });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
             if (Array.isArray(data.accountTypes) && data.accountTypes.length) {
@@ -52,17 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
         } catch (error) {
-            console.warn('[main] تعذر تحميل account-types.json', error);
+            console.warn('[main] تعذر تحميل account-types.json، سيتم استخدام البيانات الافتراضية', error);
         }
 
-        const fallbackCards = document.querySelectorAll('.account-card');
-        bindAccountCards(fallbackCards);
-        fallbackCards.forEach((card) => {
-            if (card.getAttribute('data-type') === 'school' || card.getAttribute('data-type') === 'family') {
-                card.classList.add('is-locked');
-                card.setAttribute('data-lock-message', 'متاح قريباً');
-            }
-        });
+        renderAccountCards(defaultTypes);
     }
 
     loadAccountTypes();
