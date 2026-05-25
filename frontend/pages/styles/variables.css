@@ -22,22 +22,30 @@ body {
     /* تثبيت الحجم لمنع التكبير العشوائي */
 }
 
-/* Custom Scrollbar Styles */
+/* Custom Scrollbar Styles (Match Inner Dashboard) */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
+    background: #ffffff;
+    border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cccccc;
-    border-radius: 4px;
+    background: #16a34a; /* --scrollbar-thumb */
+    border-radius: 999px;
+    border: 2px solid #ffffff;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--ynmo-green);
+    background: #15803d; /* --scrollbar-thumb-hover */
+}
+
+/* Remove top/bottom arrow buttons */
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
 }
