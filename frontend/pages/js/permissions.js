@@ -255,14 +255,14 @@
 
       const overlay = document.createElement('div');
       overlay.className = 'upgrade-modal-overlay';
-      overlay.innerHTML = \`
+      overlay.innerHTML = `
         <div class="upgrade-modal-box">
           <div class="upgrade-modal-icon"><i class="fa-solid fa-gift"></i></div>
           <div class="upgrade-modal-title">مشروع غير ربحي</div>
           <div class="upgrade-modal-text">الصلاحيات مفتوحة بالكامل للمسؤولين دون الحاجة لترقية الباقة.</div>
           <button class="upgrade-modal-btn">شكراً لكم</button>
         </div>
-      \`;
+      `;
 
       document.body.appendChild(overlay);
 

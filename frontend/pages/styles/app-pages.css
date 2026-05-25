@@ -495,7 +495,7 @@
 }
 
 .page-section-card--weekly-summary .summary-grid {
-  grid-template-columns: repeat(4, 228px);
+  grid-template-columns: repeat(4, 260px);
   justify-content: start;
   gap: 16px;
 }
@@ -916,8 +916,7 @@ html[dir="rtl"] .dashboard-flex-row {
 .page-section-card--weekly-summary .summary-box {
   width: 100%;
   height: auto !important;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
+  min-height: 160px;
   padding: 22px !important;
   border-radius: 12px !important;
 }
