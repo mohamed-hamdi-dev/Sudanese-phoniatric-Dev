@@ -209,7 +209,64 @@
 
     const upgradeBtn = container.querySelector('.permissions-upgrade__btn');
     upgradeBtn?.addEventListener('click', () => {
-      global.alert('مشروعكم غير ربحي — الصلاحيات مفتوحة للمسؤولين دون ترقية باقة.');
+      // Inject modal styles if they don't exist
+      if (!document.getElementById('custom-upgrade-modal-styles')) {
+        const style = document.createElement('style');
+        style.id = 'custom-upgrade-modal-styles';
+        style.innerHTML = `
+          .upgrade-modal-overlay {
+              position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+              background: rgba(0, 0, 0, 0.6);
+              display: flex; align-items: center; justify-content: center;
+              z-index: 99999; backdrop-filter: blur(4px);
+              animation: modalFadeIn 0.2s ease;
+          }
+          .upgrade-modal-box {
+              background: #fff; padding: 40px; border-radius: 16px;
+              box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+              text-align: center; max-width: 500px; width: 90%;
+              animation: modalPopUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+              border-top: 6px solid var(--scrollbar-thumb, #16a34a);
+          }
+          .upgrade-modal-icon {
+              font-size: 60px; color: var(--scrollbar-thumb, #16a34a); margin-bottom: 20px;
+          }
+          .upgrade-modal-title {
+              font-family: 'Cairo', sans-serif; font-size: 26px;
+              font-weight: 800; color: #1f2937; margin-bottom: 15px;
+          }
+          .upgrade-modal-text {
+              font-family: 'Cairo', sans-serif; font-size: 18px;
+              color: #4b5563; line-height: 1.7; margin-bottom: 30px;
+              direction: rtl;
+          }
+          .upgrade-modal-btn {
+              background: var(--scrollbar-thumb, #16a34a); color: #fff; border: none;
+              padding: 14px 40px; border-radius: 8px;
+              font-family: 'Cairo', sans-serif; font-size: 18px; font-weight: 700;
+              cursor: pointer; transition: all 0.2s;
+          }
+          .upgrade-modal-btn:hover { background: var(--scrollbar-thumb-hover, #15803d); transform: translateY(-2px); }
+          @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+          @keyframes modalPopUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        `;
+        document.head.appendChild(style);
+      }
+
+      const overlay = document.createElement('div');
+      overlay.className = 'upgrade-modal-overlay';
+      overlay.innerHTML = \`
+        <div class="upgrade-modal-box">
+          <div class="upgrade-modal-icon"><i class="fa-solid fa-gift"></i></div>
+          <div class="upgrade-modal-title">مشروع غير ربحي</div>
+          <div class="upgrade-modal-text">الصلاحيات مفتوحة بالكامل للمسؤولين دون الحاجة لترقية الباقة.</div>
+          <button class="upgrade-modal-btn">شكراً لكم</button>
+        </div>
+      \`;
+
+      document.body.appendChild(overlay);
+
+      overlay.querySelector('.upgrade-modal-btn').addEventListener('click', () => overlay.remove());
     });
   }
 
