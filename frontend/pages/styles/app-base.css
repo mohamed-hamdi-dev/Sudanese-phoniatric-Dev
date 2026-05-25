@@ -65,10 +65,15 @@ body {
 }
 
 /* Remove top/bottom arrow buttons */
-*::-webkit-scrollbar-button {
+*::-webkit-scrollbar-button,
+*::-webkit-scrollbar-button:start:decrement,
+*::-webkit-scrollbar-button:end:increment,
+*::-webkit-scrollbar-button:up,
+*::-webkit-scrollbar-button:down {
   width: 0 !important;
   height: 0 !important;
   display: none !important;
+  background: transparent !important;
 }
 
 #root {
