@@ -205,5 +205,32 @@
   cancelBtn?.addEventListener('click', () => {
     window.location.href = './members.html';
   });
+
+  // Avatar Upload Preview
+  const avatarUpload = document.getElementById('member-avatar-upload');
+  const dropzone = document.querySelector('.settings-editor-dropzone');
+  const dropzoneGraphic = document.querySelector('.settings-editor-dropzone-graphic');
+  const trashBtn = document.querySelector('.settings-editor-trash');
+
+  if (avatarUpload && dropzone) {
+    avatarUpload.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const url = URL.createObjectURL(file);
+        dropzone.style.backgroundImage = `url(${url})`;
+        if (dropzoneGraphic) dropzoneGraphic.style.opacity = '0';
+        if (trashBtn) trashBtn.hidden = false;
+      }
+    });
+  }
+
+  if (trashBtn && dropzone) {
+    trashBtn.addEventListener('click', () => {
+      if (avatarUpload) avatarUpload.value = '';
+      dropzone.style.backgroundImage = '';
+      if (dropzoneGraphic) dropzoneGraphic.style.opacity = '1';
+      trashBtn.hidden = true;
+    });
+  }
   });
 })();

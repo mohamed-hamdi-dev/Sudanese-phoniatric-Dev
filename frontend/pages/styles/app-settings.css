@@ -1,5 +1,5 @@
 .settings-page {
-  background: #f3f4f5;
+  background: transparent;
   min-height: calc(100vh - 60px);
   display: flex;
   overflow: hidden;
@@ -387,14 +387,19 @@
 
 .settings-editor-dropzone {
   width: 100%;
+  max-width: 160px;
   aspect-ratio: 1;
-  margin: 6px 0 10px;
+  margin: 6px auto 10px;
   border-radius: 999px;
   padding: 18px;
   background: radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.18) 0, rgba(255, 255, 255, 0.08) 38%, transparent 39%), linear-gradient(180deg, #6a6a77 0%, #5b5b67 100%);
   color: #f7f9fb;
   display: grid;
   place-items: center;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 
 .settings-editor-dropzone-graphic {
