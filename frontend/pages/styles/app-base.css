@@ -66,9 +66,9 @@ body {
 
 /* Remove top/bottom arrow buttons */
 *::-webkit-scrollbar-button {
-  width: 0;
-  height: 0;
-  display: none;
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
 }
 
 #root {
